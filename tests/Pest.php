@@ -1,5 +1,5 @@
 <?php
 
-use VendorName\Skeleton\Tests\TestCase;
+use Marjose123\FilamentWebhookServer\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
