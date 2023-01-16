@@ -40,7 +40,10 @@
         "psr-4": {
             "Marjose123\\FilamentWebhookServer\\": "src",
             "Marjose123\\FilamentWebhookServer\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/Traits/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -9,14 +9,18 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
+use Marjose123\FilamentWebhookServer\Traits\helper;
 use Spatie\ModelInfo\ModelFinder;
 use Spatie\ModelInfo\ModelInfo;
 
 class Webhooks extends Page
 {
+    use helper;
     protected static ?string $navigationIcon = 'heroicon-o-status-online';
 
     protected static string $view = 'filament-webhook-server::pages.webhooks';
+
+    public $data;
 
     protected function getHeading(): string
     {
@@ -49,6 +53,7 @@ class Webhooks extends Page
 
     public function create(): void
     {
+        ddd($this->form->getState());
 
 
         $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
@@ -77,12 +82,16 @@ class Webhooks extends Page
                         ])
                         ->required(),
                     Select::make('model')
-                        ->options(ModelInfo::forAllModels()->pluck('tableName')->map(fn ($name) =>  ucwords($name)))
+                        ->options($this->getAllModelNames())
                         ->required(),
                     KeyValue::make('headers')
 
                 ])
         ];
+    }
+    protected function getFormStatePath(): string
+    {
+        return 'data';
     }
 
 }

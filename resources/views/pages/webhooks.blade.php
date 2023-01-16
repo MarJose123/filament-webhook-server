@@ -1,6 +1,6 @@
 <x-filament::page>
 
-    <x-filament::modal id="create-webhook" width="lg">
+    <x-forms::modal id="create-webhook" width="lg">
         <x-slot name="subheading">
             <h3 class="text-xl">{{ __('filament-webhook-server::default.pages.modal.label') }}</h3>
         </x-slot>
@@ -12,5 +12,5 @@
                 </x-filament::button>
             </x-filament::modal.actions>
         </x-slot>
-    </x-filament::modal>
+    </x-forms::modal>
 </x-filament::page>
