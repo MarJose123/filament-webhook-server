@@ -32,8 +32,20 @@ class Webhooks extends Page
             Action::make('Add Webhook')
                 ->button()
                 ->label(__('filament-webhook-server::default.pages.button.add_new_webhook'))
-                ->action('openOptionModal'),
+                ->action('openCreateModal'),
         ];
+    }
+    public function openCreateModal(): void
+    {
+        $this->dispatchBrowserEvent('open-modal', ['id' => 'create-webhook']);
+    }
+
+    public function create(): void
+    {
+
+
+        $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
+        $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
     }
 
 }
