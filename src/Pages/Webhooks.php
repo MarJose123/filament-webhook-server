@@ -2,13 +2,14 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 
 class Webhooks extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-support';
+    protected static ?string $navigationIcon = 'heroicon-o-status-online';
 
-    protected static string $view = 'filament-spatie-backup::pages.backups';
+    protected static string $view = 'filament-webhook-server::pages.webhooks';
 
     protected function getHeading(): string
     {
@@ -28,9 +29,9 @@ class Webhooks extends Page
     protected function getActions(): array
     {
         return [
-            Actions\Action::make('Add Webhook')
+            Action::make('Add Webhook')
                 ->button()
-                ->label(__(''))
+                ->label(__('filament-webhook-server::default.pages.button.add_new_webhook'))
                 ->action('openOptionModal'),
         ];
     }

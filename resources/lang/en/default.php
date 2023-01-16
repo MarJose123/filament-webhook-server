@@ -1,10 +1,13 @@
 <?php
 return [
     'pages' => [
-        'heading' => '',
+        'heading' => 'Webhook',
         'navigation' => [
-            'label' => '',
-            'group' => ''
+            'label' => 'Webhook',
+            'group' => 'Developer'
+        ],
+        'button' => [
+            'add_new_webhook' => 'Add New Webhook'
         ]
     ],
 
