@@ -61,10 +61,10 @@ class Webhooks extends Page
                         ->maxLength(255)
                         ->required(),
                     Textarea::make('description')
-                        ->required(),,
+                        ->required(),
                     TextInput::make('URL to Notify')
                         ->url()
-                        ->required(),,
+                        ->required(),
                     Select::make('method')
                         ->options([
                             'get' => 'Get',
