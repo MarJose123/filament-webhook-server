@@ -2,6 +2,8 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 
@@ -50,7 +52,14 @@ class Webhooks extends Page
     protected function getFormSchema(): array
     {
         return[
-
+            Grid::make()
+                ->schema([
+                    TextInput::make('name')
+                        ->minLength(2)
+                        ->maxLength(255),
+                    TextInput::make('domain')
+                        ->url()
+                ])
         ];
     }
 
