@@ -47,5 +47,11 @@ class Webhooks extends Page
         $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
         $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
     }
+    protected function getFormSchema(): array
+    {
+        return[
+
+        ];
+    }
 
 }
