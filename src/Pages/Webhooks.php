@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 use Spatie\ModelInfo\ModelFinder;
+use Spatie\ModelInfo\ModelInfo;
 
 class Webhooks extends Page
 {
@@ -56,6 +57,7 @@ class Webhooks extends Page
     protected function getFormSchema(): array
     {
         return[
+//            ddd(ModelInfo::forAllModels()),
             Grid::make(1)
                 ->schema([
                     TextInput::make('name')
@@ -64,7 +66,8 @@ class Webhooks extends Page
                         ->required(),
                     Textarea::make('description')
                         ->required(),
-                    TextInput::make('URL to Notify')
+                    TextInput::make('url')
+                        ->label('URL to Notify')
                         ->url()
                         ->required(),
                     Select::make('method')
@@ -74,7 +77,7 @@ class Webhooks extends Page
                         ])
                         ->required(),
                     Select::make('model')
-                        ->options(ModelFinder::all())
+                        ->options(ModelInfo::forAllModels()->pluck('tableName')->map(fn ($name) =>  ucwords($name)))
                         ->required(),
                     KeyValue::make('headers')
 
