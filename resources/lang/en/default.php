@@ -10,7 +10,10 @@ return [
             'add_new_webhook' => 'Add New Webhook'
         ],
         'modal' => [
-            'label' => 'Add New Webhook'
+            'label' => 'Add New Webhook',
+            'button' => [
+                'create' => 'Create'
+            ]
         ]
     ],
     'notification' => [
