@@ -3,11 +3,13 @@
 namespace Marjose123\FilamentWebhookServer\Pages;
 
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
+use Spatie\ModelInfo\ModelFinder;
 
 class Webhooks extends Page
 {
@@ -72,11 +74,9 @@ class Webhooks extends Page
                         ])
                         ->required(),
                     Select::make('model')
-                        ->options([
-                            'get' => 'Get',
-                            'post' => 'Post'
-                        ])
+                        ->options(ModelFinder::all())
                         ->required(),
+                    KeyValue::make('headers')
 
                 ])
         ];
