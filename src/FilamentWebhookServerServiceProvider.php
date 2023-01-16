@@ -3,6 +3,7 @@
 namespace Marjose123\FilamentWebhookServer;
 
 use Filament\PluginServiceProvider;
+use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Spatie\LaravelPackageTools\Package;
 
 class FilamentWebhookServerServiceProvider extends PluginServiceProvider
@@ -14,7 +15,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     ];
 
     protected array $pages = [
-        // CustomPage::class,
+        Webhooks::class
     ];
 
     protected array $widgets = [
@@ -35,6 +36,8 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
 
     public function configurePackage(Package $package): void
     {
-        $package->name(static::$name);
+        $package->name(static::$name)
+                ->hasConfigFile()
+                ->hasMigration();
     }
 }
