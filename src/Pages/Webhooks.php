@@ -2,6 +2,7 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Select;
@@ -83,8 +84,17 @@ class Webhooks extends Page
                         ->required(),
                     Select::make('model')
                         ->options($this->getAllModelNames())
-                        ->required(),
-                    KeyValue::make('headers')
+                        ->required()
+                        ->reactive(),
+                    KeyValue::make('headers'),
+                    CheckboxList::make('data_option')
+                        ->options([
+                            'all' => 'All Model Data',
+                            'custom' => 'Custom Data',
+                        ])
+                        ->reactive()
+                        ->columns(2),
+
 
                 ])
         ];
