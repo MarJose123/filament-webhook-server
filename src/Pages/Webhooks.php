@@ -130,6 +130,14 @@ class Webhooks extends Page implements HasTable
                         'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
                     ]
                 )->columns(2)->required(),
+                CheckboxList::make('events')
+                    ->options([
+                        'created' => 'Created',
+                        'updated' => 'Updated',
+                        'deleted' => 'Deleted',
+                        'restored' => 'Restored',
+                        'forceDeleted' => 'Force Deleted',
+                    ]),
                 Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
 
             ]
