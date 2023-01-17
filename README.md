@@ -30,25 +30,25 @@ You can publish the config file with:
 php artisan vendor:publish --tag="filament-webhook-server-config"
 ```
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-webhook-server-views"
-```
-
 This is the contents of the published config file:
 
 ```php
 return [
+    /*
+     *  Models that you want to be part of the webhooks options
+     */
+    'models' => [
+        User::class,
+    ],
+    /*
+     */
+    'polling' => '10s'
 ];
+
 ```
 
 ## Usage
 
-```php
-$filament-webhook-server = new Marjose123\FilamentWebhookServer();
-echo $filament-webhook-server->echoPhrase('Hello, Marjose123!');
-```
 
 ## Testing
 
