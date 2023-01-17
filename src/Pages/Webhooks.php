@@ -94,13 +94,13 @@ class Webhooks extends Page
                             'summary' => 'Summary',
                         ])
                         ->descriptions([
-                            'all' => 'All Data of the event trigger',
+                            'all' => 'All Data of the event triggered',
                             'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
                         ])
                         ->columns(2)
                         ->required(),
                     Radio::make('verifySsl')
-                        ->label('Verify Ssl?')
+                        ->label('Verify SSL?')
                         ->boolean()
                         ->inline()
                         ->required()
