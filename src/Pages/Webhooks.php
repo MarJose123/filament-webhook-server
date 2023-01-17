@@ -2,10 +2,12 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Closure;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -95,6 +97,19 @@ class Webhooks extends Page
                         ])
                         ->reactive()
                         ->columns(2),
+                    Repeater::make('data_custom')
+                        ->schema([
+                           TextInput::make('Key')
+                                ->required(),
+                           Select::make('value')
+                                ->label('Model Key Value')
+                                ->options(function (Closure $get) {
+                                    $modelInfo = ModelInfo::forModel($get('model').'::class');
+                                    ddd($modelInfo);
+                                })
+                        ])
+                            ->visible(fn(Closure $get) => $get('data_option') === 'custom' )
+                            ->required(fn(Closure $get) => $get('data_option') === 'custom' ),
                     Radio::make('verifySsl')
                         ->label('Verify Ssl?')
                         ->boolean()
