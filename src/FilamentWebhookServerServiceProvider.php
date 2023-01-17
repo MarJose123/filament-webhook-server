@@ -3,6 +3,8 @@
 namespace Marjose123\FilamentWebhookServer;
 
 use Filament\PluginServiceProvider;
+use Illuminate\Database\Eloquent\Model;
+use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Spatie\LaravelPackageTools\Package;
 
@@ -41,5 +43,11 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
                 ->hasTranslations()
                 ->hasMigration('create_filament-webhook-server_table.php')
                 ->hasViews();
+    }
+
+    public function boot()
+    {
+        parent::boot();
+        Model::observe(ModelObserver::class);
     }
 }
