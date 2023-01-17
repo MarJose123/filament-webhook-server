@@ -7,7 +7,6 @@ use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -24,7 +23,8 @@ class Webhooks extends Page
 
     protected static string $view = 'filament-webhook-server::pages.webhooks';
 
-    public $data;
+    public ?array $data = ['header' => null];
+
 
     protected function getHeading(): string
     {
@@ -66,7 +66,6 @@ class Webhooks extends Page
     protected function getFormSchema(): array
     {
         return[
-//            ddd(ModelInfo::forAllModels()),
             Grid::make(1)
                 ->schema([
                     TextInput::make('name')
@@ -88,18 +87,23 @@ class Webhooks extends Page
                     Select::make('model')
                         ->options($this->getAllModelNames())
                         ->required(),
-                    KeyValue::make('headers'),
+                    KeyValue::make('header'),
                     Radio::make('data_option')
                         ->options([
                             'all' => 'All Model Data',
-                            'custom' => 'Custom Data',
+                            'summary' => 'Summary',
                         ])
-                        ->reactive()
-                        ->columns(2),
+                        ->descriptions([
+                            'all' => 'All Data of the event trigger',
+                            'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
+                        ])
+                        ->columns(2)
+                        ->required(),
                     Radio::make('verifySsl')
                         ->label('Verify Ssl?')
                         ->boolean()
                         ->inline()
+                        ->required()
 
                 ])
         ];
