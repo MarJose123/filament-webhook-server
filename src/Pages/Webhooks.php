@@ -5,6 +5,7 @@ namespace Marjose123\FilamentWebhookServer\Pages;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -87,14 +88,17 @@ class Webhooks extends Page
                         ->required()
                         ->reactive(),
                     KeyValue::make('headers'),
-                    CheckboxList::make('data_option')
+                    Radio::make('data_option')
                         ->options([
                             'all' => 'All Model Data',
                             'custom' => 'Custom Data',
                         ])
                         ->reactive()
                         ->columns(2),
-
+                    Radio::make('verifySsl')
+                        ->label('Verify Ssl?')
+                        ->boolean()
+                        ->inline()
 
                 ])
         ];
