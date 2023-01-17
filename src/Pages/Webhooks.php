@@ -137,7 +137,8 @@ class Webhooks extends Page implements HasTable
                         'deleted' => 'Deleted',
                         'restored' => 'Restored',
                         'forceDeleted' => 'Force Deleted',
-                    ]),
+                    ])
+                        ->columns(2),
                 Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
 
             ]
