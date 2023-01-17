@@ -93,7 +93,7 @@ class Webhooks extends Page implements HasTable
         $webhookModel->description = $data['description'];
         $webhookModel->url = $data['url'];
         $webhookModel->method = $data['method'];
-        $webhookModel->model = $data['model'];
+        $webhookModel->model = ucfirst($data['model']);
         $webhookModel->header = $data['header'];
         $webhookModel->data_option = $data['data_option'];
         $webhookModel->verifySsl = $data['verifySsl'];
