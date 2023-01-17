@@ -60,7 +60,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
 
         foreach ($MODELS as $MODEL) foreach ($MODEL as $model)
         {
-            sprintf("\\App\\Models\\%s", $model)::observe(ModelObserver::class);
+            $model::observe(ModelObserver::class);
         }
     }
 }
