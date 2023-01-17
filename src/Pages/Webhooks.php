@@ -87,8 +87,7 @@ class Webhooks extends Page
                         ->required(),
                     Select::make('model')
                         ->options($this->getAllModelNames())
-                        ->required()
-                        ->reactive(),
+                        ->required(),
                     KeyValue::make('headers'),
                     Radio::make('data_option')
                         ->options([
@@ -97,19 +96,6 @@ class Webhooks extends Page
                         ])
                         ->reactive()
                         ->columns(2),
-                    Repeater::make('data_custom')
-                        ->schema([
-                           TextInput::make('Key')
-                                ->required(),
-                           Select::make('value')
-                                ->label('Model Key Value')
-                                ->options(function (Closure $get) {
-                                    $modelInfo = ModelInfo::forModel($get('model').'::class');
-                                    ddd($modelInfo);
-                                })
-                        ])
-                            ->visible(fn(Closure $get) => $get('data_option') === 'custom' )
-                            ->required(fn(Closure $get) => $get('data_option') === 'custom' ),
                     Radio::make('verifySsl')
                         ->label('Verify Ssl?')
                         ->boolean()

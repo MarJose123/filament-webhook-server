@@ -16,9 +16,8 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0 || ^8.1",
         "filament/filament": "^2.0",
-        "illuminate/contracts": "^9.0",
         "spatie/laravel-model-info": "^1.4",
         "spatie/laravel-package-tools": "^1.13.5",
         "spatie/laravel-webhook-server": "^3.4"
