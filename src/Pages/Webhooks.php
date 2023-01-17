@@ -21,6 +21,7 @@ use Spatie\ModelInfo\ModelInfo;
 class Webhooks extends Page
 {
     use helper;
+
     protected static ?string $navigationIcon = 'heroicon-o-status-online';
 
     protected static string $view = 'filament-webhook-server::pages.webhooks';
@@ -31,92 +32,97 @@ class Webhooks extends Page
     protected function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.heading');
-    }
+
+    }//end getHeading()
+
 
     protected static function getNavigationGroup(): ?string
     {
         return __('filament-webhook-server::default.pages.navigation.group');
-    }
+
+    }//end getNavigationGroup()
+
 
     protected static function getNavigationLabel(): string
     {
         return __('filament-webhook-server::default.pages.navigation.label');
-    }
+
+    }//end getNavigationLabel()
+
 
     protected function getActions(): array
     {
         return [
             Action::make('Add Webhook')
                 ->button()
-                ->label(__('filament-webhook-server::default.pages.button.add_new_webhook'))
+                ->label(
+                    __(
+                        'filament-webhook-server::default.pages.button.add_new_webhook'
+                    )
+                )
                 ->action('openCreateModal'),
         ];
-    }
+
+    }//end getActions()
+
+
     public function openCreateModal(): void
     {
         $this->dispatchBrowserEvent('open-modal', ['id' => 'create-webhook']);
-    }
+
+    }//end openCreateModal()
+
 
     public function create(): void
     {
-        $data = $this->form->getState();
+        $data         = $this->form->getState();
         $webhookModel = new FilamentWebhookServer();
-        $webhookModel->
-
-
-
-
-        $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
+        $webhookModel->$this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
         $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
-    }
+
+    }//end create()
+
+
     protected function getFormSchema(): array
     {
-        return[
-            Grid::make(1)
-                ->schema([
-                    TextInput::make('name')
-                        ->minLength(2)
-                        ->maxLength(255)
-                        ->required(),
-                    Textarea::make('description')
-                        ->required(),
-                    TextInput::make('url')
-                        ->label('Url to Notify')
-                        ->url()
-                        ->required(),
-                    Select::make('method')
-                        ->options([
-                            'get' => 'Get',
-                            'post' => 'Post'
-                        ])
-                        ->required(),
-                    Select::make('model')
-                        ->options($this->getAllModelNames())
-                        ->required(),
-                    KeyValue::make('header'),
-                    Radio::make('data_option')
-                        ->options([
-                            'all' => 'All Model Data',
-                            'summary' => 'Summary',
-                        ])
-                        ->descriptions([
-                            'all' => 'All Data of the event triggered',
-                            'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
-                        ])
-                        ->columns(2)
-                        ->required(),
-                    Radio::make('verifySsl')
-                        ->label('Verify SSL?')
-                        ->boolean()
-                        ->inline()
-                        ->required()
+        return [Grid::make(1)->schema(
+            [
+                TextInput::make('name')->minLength(2)->maxLength(255)->required(),
+                Textarea::make('description')->required(),
+                TextInput::make('url')->label('Url to Notify')->url()->required(),
+                Select::make('method')->options(
+                    [
+                        'get'  => 'Get',
+                        'post' => 'Post',
+                    ]
+                )->required(),
+                Select::make('model')->options($this->getAllModelNames())->required(),
+                KeyValue::make('header'),
+                Radio::make('data_option')->options(
+                    [
+                        'all'     => 'All Model Data',
+                        'summary' => 'Summary',
+                    ]
+                )->descriptions(
+                    [
+                        'all'     => 'All Data of the event triggered',
+                        'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
+                    ]
+                )->columns(2)->required(),
+                Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
 
-                ])
-        ];
-    }
+            ]
+        )
+            ];
+
+    }//end getFormSchema()
+
+
     protected function getFormStatePath(): string
     {
         return 'data';
-    }
 
-}
+    }//end getFormStatePath()
+
+
+}//end class
