@@ -167,6 +167,7 @@ class Webhooks extends Page implements HasTable
                 ->label('Module'),
             TextColumn::make('url'),
             BooleanColumn::make('verifySsl'),
+            Tables\Columns\TagsColumn::make('events')->separator(',')
 
         ];
     }
