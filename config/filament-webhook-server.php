@@ -5,5 +5,8 @@ return [
      */
     'models' => [
         User::class,
-    ]
+    ],
+    /*
+     */
+    'polling' => '10s'
 ];
