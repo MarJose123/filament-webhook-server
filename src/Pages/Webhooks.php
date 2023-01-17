@@ -11,16 +11,23 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
+use Filament\Tables;
 use Filament\Pages\Page;
+use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
 use Illuminate\Support\Facades\DB;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Marjose123\FilamentWebhookServer\Traits\helper;
 use Spatie\ModelInfo\ModelFinder;
 use Spatie\ModelInfo\ModelInfo;
 
-class Webhooks extends Page
+class Webhooks extends Page implements HasTable
 {
     use helper;
+    use InteractsWithTable;
 
     protected static ?string $navigationIcon = 'heroicon-o-status-online';
 
@@ -94,7 +101,7 @@ class Webhooks extends Page
         $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
         $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
 
-    }//end create()
+    }
 
 
     protected function getFormSchema(): array
@@ -129,14 +136,65 @@ class Webhooks extends Page
         )
             ];
 
-    }//end getFormSchema()
-
-
+    }
     protected function getFormStatePath(): string
     {
         return 'data';
 
-    }//end getFormStatePath()
+    }
 
 
-}//end class
+    protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return FilamentWebhookServer::query();
+    }
+
+    protected function getTableColumns(): array
+    {
+        return [
+            TextColumn::make('name'),
+            TextColumn::make('description'),
+            TextColumn::make('model')
+                ->label('Module'),
+            TextColumn::make('url'),
+            BooleanColumn::make('verifySsl'),
+
+        ];
+    }
+    protected function isTablePaginationEnabled(): bool
+    {
+        return true;
+    }
+    protected function getTableEmptyStateIcon(): ?string
+
+    {
+        return 'heroicon-o-status-offline';
+    }
+    protected function getTableEmptyStateHeading(): ?string
+    {
+        return 'No Webhook';
+    }
+    protected function getTableEmptyStateDescription(): ?string
+    {
+        return 'You may create a webhook using the button below.';
+    }
+    protected function getTableEmptyStateActions(): array
+    {
+        return [
+            Tables\Actions\Action::make('create')
+                ->label('Create post')
+                ->button()
+                ->label(
+                    __(
+                        'filament-webhook-server::default.pages.button.add_new_webhook'
+                    )
+                )
+                ->action('openCreateModal'),
+        ];
+    }
+    protected function getTablePollingInterval(): ?string
+    {
+        return config('filament-webhook-server.polling', '10s');
+    }
+
+}
