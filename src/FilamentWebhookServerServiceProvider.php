@@ -23,11 +23,11 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     ];
 
     protected array $styles = [
-        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.css',
+//        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.css',
     ];
 
     protected array $scripts = [
-        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.js',
+//        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.js',
     ];
 
     // protected array $beforeCoreScripts = [
