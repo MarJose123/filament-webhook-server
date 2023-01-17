@@ -4,6 +4,7 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Spatie\LaravelPackageTools\Package;
@@ -48,6 +49,18 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     public function boot()
     {
         parent::boot();
-        Model::observe(ModelObserver::class);
+       self::registerGlobalObserver();
+    }
+    private static function registerGlobalObserver()
+    {
+        /** @var Model[] $MODELS */
+        $MODELS = [
+            config('filament-webhook-server.models')
+        ];
+
+        foreach ($MODELS as $MODEL) foreach ($MODEL as $model)
+        {
+            sprintf("\\App\\Models\\%s", $model)::observe(ModelObserver::class);
+        }
     }
 }
