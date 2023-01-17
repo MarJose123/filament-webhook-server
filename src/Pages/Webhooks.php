@@ -75,9 +75,18 @@ class Webhooks extends Page
 
     public function create(): void
     {
-        $data         = $this->form->getState();
+        $data = $this->form->getState();
         $webhookModel = new FilamentWebhookServer();
-        $webhookModel->$this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
+        $webhookModel->name = $data['name'];
+        $webhookModel->description = $data['description'];
+        $webhookModel->url = $data['url'];
+        $webhookModel->method = $data['method'];
+        $webhookModel->model = $data['model'];
+        $webhookModel->header = $data['header'];
+        $webhookModel->data_option = $data['data_option'];
+        $webhookModel->verifySsl = $data['verifySsl'];
+        $webhookModel->save();
+        $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
         $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
 
     }//end create()
