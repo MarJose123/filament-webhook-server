@@ -17,4 +17,7 @@ class FilamentWebhookServer extends Model
         'verifySsl',
         'status',
     ];
+    protected $casts = [
+        'header' => 'array'
+    ];
 }
