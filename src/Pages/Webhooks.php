@@ -33,21 +33,26 @@ class Webhooks extends Page
     {
         return __('filament-webhook-server::default.pages.heading');
 
-    }//end getHeading()
+    }
 
 
     protected static function getNavigationGroup(): ?string
     {
         return __('filament-webhook-server::default.pages.navigation.group');
 
-    }//end getNavigationGroup()
+    }
+
+    public function mount(): void
+    {
+        $this->form->fill();
+    }
 
 
     protected static function getNavigationLabel(): string
     {
         return __('filament-webhook-server::default.pages.navigation.label');
 
-    }//end getNavigationLabel()
+    }
 
 
     protected function getActions(): array
@@ -63,14 +68,14 @@ class Webhooks extends Page
                 ->action('openCreateModal'),
         ];
 
-    }//end getActions()
+    }
 
 
     public function openCreateModal(): void
     {
         $this->dispatchBrowserEvent('open-modal', ['id' => 'create-webhook']);
 
-    }//end openCreateModal()
+    }
 
 
     public function create(): void
