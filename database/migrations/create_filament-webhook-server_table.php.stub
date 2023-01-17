@@ -15,10 +15,10 @@ return new class extends Migration
             $table->string('url');
             $table->string('method');
             $table->string('model');
-            $table->json('header');
+            $table->json('header')->nullable();
             $table->string('data_option');
             $table->boolean('verifySsl');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
