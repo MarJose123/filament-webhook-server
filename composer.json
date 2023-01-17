@@ -42,7 +42,7 @@
             "Marjose123\\FilamentWebhookServer\\Database\\Factories\\": "database/factories"
         },
         "files": [
-            "src/Traits/helpers.php"
+            "src/Traits/helper.php"
         ]
     },
     "autoload-dev": {
