@@ -12,6 +12,8 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\DB;
+use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Marjose123\FilamentWebhookServer\Traits\helper;
 use Spatie\ModelInfo\ModelFinder;
 use Spatie\ModelInfo\ModelInfo;
@@ -57,7 +59,11 @@ class Webhooks extends Page
 
     public function create(): void
     {
-        ddd($this->form->getState());
+        $data = $this->form->getState();
+        $webhookModel = new FilamentWebhookServer();
+        $webhookModel->
+
+
 
 
         $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);

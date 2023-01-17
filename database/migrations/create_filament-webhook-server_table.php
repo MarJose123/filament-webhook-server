@@ -18,6 +18,7 @@ return new class extends Migration
             $table->json('header');
             $table->string('data_option');
             $table->boolean('verifySsl');
+            $table->string('status');
             $table->timestamps();
         });
     }
