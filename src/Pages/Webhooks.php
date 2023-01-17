@@ -75,7 +75,7 @@ class Webhooks extends Page
                     Textarea::make('description')
                         ->required(),
                     TextInput::make('url')
-                        ->label('URL to Notify')
+                        ->label('Url to Notify')
                         ->url()
                         ->required(),
                     Select::make('method')
