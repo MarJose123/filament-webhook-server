@@ -7,7 +7,7 @@
 
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package provides a Filament page that you can send webhook server . You'll find installation instructions and full documentation on [spatie/laravel-webhook-server](https://github.com/spatie/laravel-webhook-server).
 
 ## Installation
 
@@ -48,7 +48,12 @@ return [
 ```
 
 ## Usage
+> 1. Add the models that you want to be part of the webhook
+> 2. This package will automatically register the `Webhook-Server`. You'll be able to see it when you visit your Filament admin panel.
 
+## Customising the polling interval
+
+You can customise the polling interval for the `Webhook-Server` by publishing the configuration file and updating the `polling` value.
 
 ## Testing
 
