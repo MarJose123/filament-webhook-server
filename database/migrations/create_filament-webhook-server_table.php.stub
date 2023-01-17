@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('data_option');
             $table->boolean('verifySsl');
             $table->string('status')->nullable();
+            $table->json('events')->nullable();
             $table->timestamps();
         });
     }
