@@ -10,9 +10,14 @@ return new class extends Migration
     {
         Schema::create('filament-webhook-server_table', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('name');
+            $table->longText('description');
+            $table->string('url');
+            $table->string('method');
+            $table->string('model');
+            $table->json('header');
+            $table->string('data_option');
+            $table->boolean('verifySsl');
             $table->timestamps();
         });
     }
