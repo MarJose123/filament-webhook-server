@@ -106,8 +106,8 @@ class Webhooks extends Page
                 TextInput::make('url')->label('Url to Notify')->url()->required(),
                 Select::make('method')->options(
                     [
-                        'get'  => 'Get',
                         'post' => 'Post',
+                        'get'  => 'Get',
                     ]
                 )->required(),
                 Select::make('model')->options($this->getAllModelNames())->required(),
