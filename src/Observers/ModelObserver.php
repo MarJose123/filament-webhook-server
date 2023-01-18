@@ -21,7 +21,7 @@ class ModelObserver
         /*
          * Send to Job Process
          */
-        (new HookJobProcess($search, $model))->send();
+        (new HookJobProcess($search, $model, 'created'))->send();
 
     }
 
@@ -36,7 +36,7 @@ class ModelObserver
         /*
          * Send to Job Process
          */
-        (new HookJobProcess($search, $model))->send();
+        (new HookJobProcess($search, $model, 'updated'))->send();
 
     }
 
@@ -51,7 +51,7 @@ class ModelObserver
         /*
          * Send to Job Process
          */
-        (new HookJobProcess($search, $model))->send();
+        (new HookJobProcess($search, $model, 'deleted'))->send();
     }
 
     public function restored(Model $model)
@@ -65,7 +65,7 @@ class ModelObserver
         /*
          * Send to Job Process
          */
-        (new HookJobProcess($search, $model))->send();
+        (new HookJobProcess($search, $model, 'restored'))->send();
     }
 
     public function forceDeleted(Model $model)
@@ -79,6 +79,6 @@ class ModelObserver
         /*
          * Send to Job Process
          */
-        (new HookJobProcess($search, $model))->send();
+        (new HookJobProcess($search, $model, 'forceDeleted'))->send();
     }
 }
