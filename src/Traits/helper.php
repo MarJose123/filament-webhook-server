@@ -2,7 +2,8 @@
 
 namespace Marjose123\FilamentWebhookServer\Traits;
 
-use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 trait helper
 {
@@ -17,6 +18,15 @@ trait helper
 
         return $models;
 
+    }
+
+    public function payloadAll(Model $model, $event, $module): object|array
+    {
+        return ApiResponseBuilder::create()
+                ->setModelData($model)
+                ->setEvent($event)
+                ->setModule($module)
+                ->generate();
     }
 
 }
