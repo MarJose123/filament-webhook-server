@@ -55,6 +55,21 @@ return [
 
 You can customise the polling interval for the `Webhook-Server` by publishing the configuration file and updating the `polling` value.
 
+## Webhook payload Structure
+```json
+[
+  {
+    "event": "created",  // <== Type of Event
+    "module": "Testing", // <== Module that were the event happend
+    "triggered_at": "2023-01-18T05:07:37.748031Z", // <== Based on the Date and time the Event happen
+    "data": { // <== Actual information depending on what you selected "Summary or All"
+      "id": 34,
+      "created_at": "2023-01-18T05:07:37.000000Z"
+    }
+  }
+]
+```
+
 ## Testing
 
 ```bash
