@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/marjose123/filament-webhook-server.svg?style=flat-square)](https://packagist.org/packages/marjose123/filament-webhook-server)
 [![Total Downloads](https://img.shields.io/packagist/dt/marjose123/filament-webhook-server.svg?style=flat-square)](https://packagist.org/packages/marjose123/filament-webhook-server)
 
-[![image1](https://github.com/MarJose123/filament-webhook-server/blob/main/.art/filament-webhook-server1.png)]
+![image1](https://github.com/MarJose123/filament-webhook-server/blob/main/.art/filament-webhook-server1.png)
 
 This package provides a Filament page that you can send webhook server . You'll find installation instructions and full documentation on [spatie/laravel-webhook-server](https://github.com/spatie/laravel-webhook-server).
 
