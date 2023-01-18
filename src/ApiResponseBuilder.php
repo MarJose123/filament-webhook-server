@@ -1,10 +1,9 @@
 <?php
 
-namespace Marjose123\FilamentWebhookServer\Traits;
+namespace Marjose123\FilamentWebhookServer;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 class ApiResponseBuilder
 {

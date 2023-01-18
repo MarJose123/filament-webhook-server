@@ -3,7 +3,7 @@
 namespace Marjose123\FilamentWebhookServer\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use Marjose123\FilamentWebhookServer\ApiResponseBuilder;
 
 trait helper
 {
