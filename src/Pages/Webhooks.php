@@ -96,6 +96,7 @@ class Webhooks extends Page implements HasTable
         $webhookModel->model = ucfirst($data['model']);
         $webhookModel->header = $data['header'];
         $webhookModel->data_option = $data['data_option'];
+        $webhookModel->events = $data['events'];
         $webhookModel->verifySsl = $data['verifySsl'];
         $webhookModel->save();
         $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
