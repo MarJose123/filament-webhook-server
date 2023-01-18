@@ -28,5 +28,13 @@ trait helper
                 ->setModule($module)
                 ->generate();
     }
+    public function payloadSummary(Model $model, $event, $module): object|array
+    {
+        return ApiResponseBuilder::create()
+            ->setSummaryModelData($model)
+            ->setEvent($event)
+            ->setModule($module)
+            ->generate();
+    }
 
 }
