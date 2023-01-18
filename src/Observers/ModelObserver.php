@@ -3,7 +3,7 @@
 namespace Marjose123\FilamentWebhookServer\Observers;
 
 use Illuminate\Database\Eloquent\Model;
-use Marjose123\FilamentWebhookServer\hookJobProcess;
+use Marjose123\FilamentWebhookServer\HookJobProcess;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Spatie\ModelInfo\ModelInfo;
 
