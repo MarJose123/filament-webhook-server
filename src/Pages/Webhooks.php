@@ -3,6 +3,7 @@
 namespace Marjose123\FilamentWebhookServer\Pages;
 
 use Closure;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
@@ -18,6 +19,7 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Marjose123\FilamentWebhookServer\Traits\helper;
@@ -151,6 +153,70 @@ class Webhooks extends Page implements HasTable
     {
         return 'data';
 
+    }
+
+    protected function getTableViewForm(): array
+    {
+        return [Grid::make(1)->schema(
+            [
+                TextInput::make('name')->minLength(2)->maxLength(255)->required(),
+                Textarea::make('description')->required(),
+                TextInput::make('url')->label('Url to Notify')->url()->required(),
+                Select::make('method')->options(
+                    [
+                        'post' => 'Post',
+                        'get'  => 'Get',
+                    ]
+                )->required(),
+                TextInput::make('model')->required(),
+                KeyValue::make('header'),
+                Radio::make('data_option')->options(
+                    [
+                        'all'     => 'All Model Data',
+                        'summary' => 'Summary',
+                    ]
+                )->descriptions(
+                    [
+                        'all'     => 'All Data of the event triggered',
+                        'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
+                    ]
+                )->columns(2)->required(),
+                CheckboxList::make('events')
+                    ->options([
+                        'created' => 'Created',
+                        'updated' => 'Updated',
+                        'deleted' => 'Deleted',
+                        'restored' => 'Restored',
+                        'forceDeleted' => 'Force Deleted',
+                    ])
+                    ->columns(2),
+                Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
+
+            ]
+        )
+        ];
+
+    }
+
+    protected function getTableActions(): array
+    {
+        return [
+            Tables\Actions\ViewAction::make('view')
+                ->mountUsing(fn (ComponentContainer $form, FilamentWebhookServer $record) => $form->fill([
+                    'name' => $record->name,
+                    'description' => $record->description,
+                    'url' => $record->url,
+                    'method' => $record->method,
+                    'model' => $record->model,
+                    'header' => $record->header,
+                    'data_option' => $record->data_option,
+                    'verifySsl' => $record->verifySsl,
+                    'events' => $record->events
+                ]))
+                ->form($this->getTableViewForm()),
+            Tables\Actions\DeleteAction::make('delete')
+                ->requiresConfirmation(),
+        ];
     }
 
 
