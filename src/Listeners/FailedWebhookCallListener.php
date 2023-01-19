@@ -19,7 +19,7 @@ class FailedWebhookCallListener
             $webhookClientHistory = new FilamentWebhookServerHistory();
             $webhookClientHistory->webhook_client = $event->meta['webhookClient'];
             $webhookClientHistory->uuid = $event->uuid;
-            $webhookClientHistory->status_code = $event->response['statusCode'];
+            $webhookClientHistory->status_code = $event->response->getStatusCode();
             $webhookClientHistory->errorMessage = $event->errorMessager;
             $webhookClientHistory->errorType = $event->errorType;
             $webhookClientHistory->attempt = $event->attempt;
