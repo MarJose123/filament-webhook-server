@@ -47,7 +47,8 @@ class ApiResponseBuilder
     {
         $payload = [
             'id' => $model->id ?? $model->uuid ?? null,
-            'created_at' => $model->created_at ?? Carbon::now()
+            'created_at' => $model->created_at ?? Carbon::now()->timezone(config('app.timezone')),
+            'updated_at' => $model->updated_at ?? null
         ];
         $this->payload = (object) $payload;
         return  $this;
@@ -59,7 +60,7 @@ class ApiResponseBuilder
         $apiReponse =  [
             'event' => $this->event ?? null,
             'module' => $this->module,
-            'triggered_at' => Carbon::now()->timezone('Asia/Manila'),
+            'triggered_at' => Carbon::now()->timezone(config('app.timezone')),
             'data' => $this->payload
         ];
 
