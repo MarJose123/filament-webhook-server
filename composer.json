@@ -27,7 +27,7 @@
         "friendsofphp/php-cs-fixer": "^3.13",
         "nunomaduro/collision": "^6.0",
         "orchestra/testbench": "^7.0",
-        "pestphp/pest": "^1.21",
+        "pestphp/pest": "^1.22",
         "pestphp/pest-plugin-laravel": "^1.1",
         "pestphp/pest-plugin-livewire": "^1.0",
         "pestphp/pest-plugin-parallel": "^0.3",

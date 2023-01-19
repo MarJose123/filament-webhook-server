@@ -1,5 +1,6 @@
 <?php
+use function Pest\Livewire\livewire;
 
-it('can test', function () {
-    expect(true)->toBeTrue();
+it('can render page', function () {
+    livewire(\Marjose123\FilamentWebhookServer\Pages\Webhooks::class)->assertSuccessful();
 });
