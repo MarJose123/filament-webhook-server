@@ -10,6 +10,6 @@ return [
      */
     'polling' => '10s',
     'webhook' => [
-        'keep_history' => true
+        'keep_history' => false
     ]
 ];
