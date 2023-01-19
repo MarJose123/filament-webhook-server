@@ -8,5 +8,8 @@ return [
     ],
     /*
      */
-    'polling' => '10s'
+    'polling' => '10s',
+    'webhook' => [
+        'keep_history' => true
+    ]
 ];
