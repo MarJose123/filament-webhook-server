@@ -43,7 +43,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
         $package->name(static::$name)
                 ->hasConfigFile()
                 ->hasTranslations()
-                ->hasMigration('create_filament-webhook-server_table')
+                ->hasMigrations(['create_filament-webhook-server_table', '2023_01_19_144816_create_filament_webhook_server_histories_table'])
                 ->hasViews();
     }
 
