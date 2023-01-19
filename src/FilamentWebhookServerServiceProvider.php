@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
+use Marjose123\FilamentWebhookServer\Providers\EventServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 
 class FilamentWebhookServerServiceProvider extends PluginServiceProvider
@@ -44,6 +45,12 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
                 ->hasTranslations()
                 ->hasMigration('create_filament-webhook-server_table')
                 ->hasViews();
+    }
+
+    public function register()
+    {
+        parent::register();
+        $this->app->register(EventServiceProvider::class);
     }
 
     public function boot()
