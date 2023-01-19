@@ -32,6 +32,8 @@ class HookJobProcess
                 case "summary":
                     WebhookCall::create()
                         ->url($webhookClient->url)
+                        ->maximumTries(3)
+                        ->meta(['webhookClient' => $webhookClient->id])
                         ->doNotSign()
                         ->useHttpVerb($webhookClient->method)
                         ->verifySsl($webhookClient->verifySsl)
@@ -41,8 +43,10 @@ class HookJobProcess
 
                     break;
                 case "all":
-                    WebhookCall::create()
+                   WebhookCall::create()
                         ->url($webhookClient->url)
+                        ->maximumTries(3)
+                        ->meta(['webhookClient' => $webhookClient->id])
                         ->doNotSign()
                         ->useHttpVerb($webhookClient->method)
                         ->verifySsl($webhookClient->verifySsl)
