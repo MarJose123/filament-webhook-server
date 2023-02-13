@@ -1,6 +1,6 @@
 <?php
 
-namespace Marjose123\FilamentWebhookServer\Listeners;
+namespace Marjose123\FilamentWebhookServer\Events\Listeners;
 
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
 use Spatie\WebhookServer\Events\FinalWebhookCallFailedEvent;

@@ -3,8 +3,9 @@
 namespace Marjose123\FilamentWebhookServer\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Marjose123\FilamentWebhookServer\Listeners\FailedWebhookCallListener;
-use Marjose123\FilamentWebhookServer\Listeners\SuccessWebhookCallListener;
+use Illuminate\Support\Facades\Event;
+use Marjose123\FilamentWebhookServer\Events\Listeners\FailedWebhookCallListener;
+use Marjose123\FilamentWebhookServer\Events\Listeners\SuccessWebhookCallListener;
 use Spatie\WebhookServer\Events\FinalWebhookCallFailedEvent;
 use Spatie\WebhookServer\Events\WebhookCallSucceededEvent;
 
@@ -27,5 +28,11 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        Event::listen(
+            WebhookCallSucceededEvent::class,
+            [
+                SuccessWebhookCallListener::class, 'handle'
+            ],
+        );
     }
 }

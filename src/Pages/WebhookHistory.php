@@ -20,7 +20,7 @@ class WebhookHistory extends Page implements HasTable
 
     protected static bool $shouldRegisterNavigation = false;
 
-    protected string $webhookClient_Id;
+    protected string|null $webhookClient_Id;
 
     protected function getHeading(): string
     {
@@ -35,9 +35,11 @@ class WebhookHistory extends Page implements HasTable
          /* Abort the request if the  is empty */
 //         abort_unless(isset($this->webhookClient_Id), 403);
 
+     }else{
+         $this->redirect(url()->previous());
      }
 
-//      $this->redirect(url()->previous());
+
     }
 
     protected function getTableQuery(): Builder
