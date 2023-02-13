@@ -3,11 +3,11 @@
 namespace Marjose123\FilamentWebhookServer\Pages;
 
 use Filament\Pages\Page;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Actions\Action;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
 
 class WebhookHistory extends Page implements HasTable
@@ -51,13 +51,15 @@ class WebhookHistory extends Page implements HasTable
             TextColumn::make('attempt'),
         ];
     }
+
     protected function getTableActions(): array
     {
         return [
             Action::make('Go Back')
-                ->url(Webhooks::getUrl())
+                ->url(Webhooks::getUrl()),
         ];
     }
+
     protected function getActions(): array
     {
         return [
@@ -82,6 +84,7 @@ class WebhookHistory extends Page implements HasTable
     {
         return 'No transaction log yet';
     }
+
     protected function getTablePollingInterval(): ?string
     {
         return config('filament-webhook-server.polling', '10s');
