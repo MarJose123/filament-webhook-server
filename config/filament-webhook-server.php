@@ -1,4 +1,5 @@
 <?php
+
 return [
     /*
      *  Models that you want to be part of the webhooks options
@@ -8,5 +9,8 @@ return [
     ],
     /*
      */
-    'polling' => '10s'
+    'polling' => '10s',
+    'webhook' => [
+        'keep_history' => false,
+    ],
 ];

@@ -7,13 +7,12 @@ use Marjose123\FilamentWebhookServer\HookJobProcess;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Spatie\ModelInfo\ModelInfo;
 
-
 class ModelObserver
 {
     public function created(Model $model)
     {
         $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\","", $modelInfo->class));
+        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
         /*
          * Search on the DB that want to receive webhook from this model
          */
@@ -22,13 +21,12 @@ class ModelObserver
          * Send to Job Process
          */
         (new HookJobProcess($search, $model, 'created', $module))->send();
-
     }
 
     public function updated(Model $model)
     {
         $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\","", $modelInfo->class));
+        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
         /*
          * Search on the DB that want to receive webhook from this model
          */
@@ -37,13 +35,12 @@ class ModelObserver
          * Send to Job Process
          */
         (new HookJobProcess($search, $model, 'updated', $module))->send();
-
     }
 
     public function deleted(Model $model)
     {
         $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\","", $modelInfo->class));
+        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
         /*
          * Search on the DB that want to receive webhook from this model
          */
@@ -57,7 +54,7 @@ class ModelObserver
     public function restored(Model $model)
     {
         $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\","", $modelInfo->class));
+        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
         /*
          * Search on the DB that want to receive webhook from this model
          */
@@ -71,7 +68,7 @@ class ModelObserver
     public function forceDeleted(Model $model)
     {
         $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\","", $modelInfo->class));
+        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
         /*
          * Search on the DB that want to receive webhook from this model
          */

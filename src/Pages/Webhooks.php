@@ -2,7 +2,6 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
-use Closure;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
@@ -12,19 +11,14 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Actions\Action;
-use Filament\Tables;
 use Filament\Pages\Page;
+use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Marjose123\FilamentWebhookServer\Traits\helper;
-use Spatie\ModelInfo\ModelFinder;
-use Spatie\ModelInfo\ModelInfo;
 
 class Webhooks extends Page implements HasTable
 {
@@ -37,18 +31,14 @@ class Webhooks extends Page implements HasTable
 
     public ?array $data = ['header' => null];
 
-
     protected function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.heading');
-
     }
-
 
     protected static function getNavigationGroup(): ?string
     {
         return __('filament-webhook-server::default.pages.navigation.group');
-
     }
 
     public function mount(): void
@@ -56,13 +46,10 @@ class Webhooks extends Page implements HasTable
         $this->form->fill();
     }
 
-
     protected static function getNavigationLabel(): string
     {
         return __('filament-webhook-server::default.pages.navigation.label');
-
     }
-
 
     protected function getActions(): array
     {
@@ -76,16 +63,12 @@ class Webhooks extends Page implements HasTable
                 )
                 ->action('openCreateModal'),
         ];
-
     }
-
 
     public function openCreateModal(): void
     {
         $this->dispatchBrowserEvent('open-modal', ['id' => 'create-webhook']);
-
     }
-
 
     public function create(): void
     {
@@ -103,9 +86,7 @@ class Webhooks extends Page implements HasTable
         $webhookModel->save();
         $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
         $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
-
     }
-
 
     protected function getFormSchema(): array
     {
@@ -117,19 +98,19 @@ class Webhooks extends Page implements HasTable
                 Select::make('method')->options(
                     [
                         'post' => 'Post',
-                        'get'  => 'Get',
+                        'get' => 'Get',
                     ]
                 )->required(),
                 Select::make('model')->options($this->getAllModelNames())->required(),
                 KeyValue::make('header'),
                 Radio::make('data_option')->options(
                     [
-                        'all'     => 'All Model Data',
+                        'all' => 'All Model Data',
                         'summary' => 'Summary',
                     ]
                 )->descriptions(
                     [
-                        'all'     => 'All Data of the event triggered',
+                        'all' => 'All Data of the event triggered',
                         'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
                     ]
                 )->columns(2)->required(),
@@ -145,14 +126,13 @@ class Webhooks extends Page implements HasTable
                 Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
 
             ]
-        )
-            ];
-
+        ),
+        ];
     }
+
     protected function getFormStatePath(): string
     {
         return 'data';
-
     }
 
     protected function getTableViewForm(): array
@@ -165,19 +145,19 @@ class Webhooks extends Page implements HasTable
                 Select::make('method')->options(
                     [
                         'post' => 'Post',
-                        'get'  => 'Get',
+                        'get' => 'Get',
                     ]
                 )->required(),
                 TextInput::make('model')->required(),
                 KeyValue::make('header'),
                 Radio::make('data_option')->options(
                     [
-                        'all'     => 'All Model Data',
+                        'all' => 'All Model Data',
                         'summary' => 'Summary',
                     ]
                 )->descriptions(
                     [
-                        'all'     => 'All Data of the event triggered',
+                        'all' => 'All Data of the event triggered',
                         'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
                     ]
                 )->columns(2)->required(),
@@ -193,14 +173,18 @@ class Webhooks extends Page implements HasTable
                 Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
 
             ]
-        )
+        ),
         ];
-
     }
 
     protected function getTableActions(): array
     {
         return [
+            Tables\Actions\Action::make('View Logs')
+                ->visible(fn (): bool => config('filament-webhook-server.webhook.keep_history'))
+                ->icon('heroicon-o-document-text')
+                ->color('success')
+                ->url(fn (FilamentWebhookServer $record): string => WebhookHistory::getUrl(['client_id' => $record->id])),
             Tables\Actions\ViewAction::make('view')
                 ->mountUsing(fn (ComponentContainer $form, FilamentWebhookServer $record) => $form->fill([
                     'name' => $record->name,
@@ -211,14 +195,13 @@ class Webhooks extends Page implements HasTable
                     'header' => $record->header,
                     'data_option' => $record->data_option,
                     'verifySsl' => $record->verifySsl,
-                    'events' => $record->events
+                    'events' => $record->events,
                 ]))
                 ->form($this->getTableViewForm()),
             Tables\Actions\DeleteAction::make('delete')
                 ->requiresConfirmation(),
         ];
     }
-
 
     protected function getTableQuery(): \Illuminate\Database\Eloquent\Builder
     {
@@ -234,27 +217,31 @@ class Webhooks extends Page implements HasTable
                 ->label('Module'),
             TextColumn::make('url'),
             BooleanColumn::make('verifySsl'),
-            Tables\Columns\TagsColumn::make('events')->separator(',')
+            Tables\Columns\TagsColumn::make('events')->separator(','),
 
         ];
     }
+
     protected function isTablePaginationEnabled(): bool
     {
         return true;
     }
-    protected function getTableEmptyStateIcon(): ?string
 
+    protected function getTableEmptyStateIcon(): ?string
     {
         return 'heroicon-o-status-offline';
     }
+
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'No Webhook';
     }
+
     protected function getTableEmptyStateDescription(): ?string
     {
         return 'You may create a webhook using the button below.';
     }
+
     protected function getTableEmptyStateActions(): array
     {
         return [
@@ -269,9 +256,9 @@ class Webhooks extends Page implements HasTable
                 ->action('openCreateModal'),
         ];
     }
+
     protected function getTablePollingInterval(): ?string
     {
         return config('filament-webhook-server.polling', '10s');
     }
-
 }

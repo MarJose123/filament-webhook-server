@@ -25,6 +25,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.13",
+        "laravel/pint": "^1.4",
         "nunomaduro/collision": "^6.0",
         "orchestra/testbench": "^7.0",
         "pestphp/pest": "^1.22",
@@ -52,6 +53,7 @@
     },
     "scripts": {
         "test:pest": "vendor/bin/pest --parallel",
+        "format": "./vendor/bin/pint",
         "test": [
             "@test:pest",
             "@test:phpstan"
