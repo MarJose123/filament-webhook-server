@@ -36,6 +36,8 @@ class SuccessWebhookCallListener
         $webhookClientHistory->errorType = $event->errorType;
         $webhookClientHistory->attempt = $event->attempt;
         $res = $webhookClientHistory->save();
-        Log::info($res);
+        Log::debug($res);
+        app('log')->debug("Success webhook call");
+        app('log')->debug($res);
     }
 }

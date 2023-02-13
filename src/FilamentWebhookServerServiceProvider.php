@@ -54,7 +54,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     public function register()
     {
         parent::register();
-        $this->app->register(EventServiceProvider::class);
+//        $this->app->register(EventServiceProvider::class);
     }
 
     public function boot()
@@ -63,9 +63,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
         self::registerGlobalObserver();
         Event::listen(
             WebhookCallSucceededEvent::class,
-            [
-                SuccessWebhookCallListener::class, 'handle'
-            ],
+            [SuccessWebhookCallListener::class, 'handle'],
         );
     }
 
