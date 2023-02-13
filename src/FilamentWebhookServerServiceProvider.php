@@ -4,11 +4,14 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
+use Marjose123\FilamentWebhookServer\Events\Listeners\SuccessWebhookCallListener;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Marjose123\FilamentWebhookServer\Providers\EventServiceProvider;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\WebhookServer\Events\WebhookCallSucceededEvent;
 
 class FilamentWebhookServerServiceProvider extends PluginServiceProvider
 {
@@ -58,6 +61,12 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     {
         parent::boot();
         self::registerGlobalObserver();
+        Event::listen(
+            WebhookCallSucceededEvent::class,
+            [
+                SuccessWebhookCallListener::class, 'handle'
+            ],
+        );
     }
 
     private static function registerGlobalObserver()
