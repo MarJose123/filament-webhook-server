@@ -2,6 +2,8 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -46,7 +48,13 @@ class WebhookHistory extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return  [
-
+            Grid::make(1)->schema([
+                TextInput::make('uuid'),
+                TextInput::make('status_code'),
+                TextInput::make('errorMessage'),
+                TextInput::make('errorType'),
+                TextInput::make('attempt'),
+            ])
         ];
     }
 
