@@ -54,7 +54,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     public function register()
     {
         parent::register();
-//        $this->app->register(EventServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
     }
 
     public function boot()
