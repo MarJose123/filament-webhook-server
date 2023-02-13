@@ -4,9 +4,11 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
+use Spatie\LaravelPackageTools\Exceptions\InvalidPackage;
 use Spatie\LaravelPackageTools\Package;
 
 
@@ -48,6 +50,9 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
                 ->hasViews();
     }
 
+    /**
+     * @throws InvalidPackage
+     */
     public function register()
     {
         parent::register();
