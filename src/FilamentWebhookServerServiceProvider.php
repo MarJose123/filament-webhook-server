@@ -6,6 +6,7 @@ use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Event;
 use Marjose123\FilamentWebhookServer\Events\Listeners\SuccessWebhookCallListener;
+use Marjose123\FilamentWebhookServer\Listeners\WebhookSuccessListener;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
@@ -63,7 +64,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
         self::registerGlobalObserver();
         Event::listen(
             WebhookCallSucceededEvent::class,
-            [SuccessWebhookCallListener::class, 'handle'],
+            [WebhookSuccessListener::class, 'handle'],
         );
     }
 
