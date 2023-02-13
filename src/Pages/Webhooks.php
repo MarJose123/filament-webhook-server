@@ -138,41 +138,41 @@ class Webhooks extends Page implements HasTable
     protected function getTableViewForm(): array
     {
         return [Grid::make(1)->schema(
-        [
-            TextInput::make('name')->minLength(2)->maxLength(255)->required(),
-            Textarea::make('description')->required(),
-            TextInput::make('url')->label('Url to Notify')->url()->required(),
-            Select::make('method')->options(
-                [
-                    'post' => 'Post',
-                    'get' => 'Get',
-                ]
-            )->required(),
-            TextInput::make('model')->required(),
-            KeyValue::make('header'),
-            Radio::make('data_option')->options(
-                [
-                    'all' => 'All Model Data',
-                    'summary' => 'Summary',
-                ]
-            )->descriptions(
-                [
-                    'all' => 'All Data of the event triggered',
-                    'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
-                ]
-            )->columns(2)->required(),
-            CheckboxList::make('events')
-                ->options([
-                    'created' => 'Created',
-                    'updated' => 'Updated',
-                    'deleted' => 'Deleted',
-                    'restored' => 'Restored',
-                    'forceDeleted' => 'Force Deleted',
-                ])
-                ->columns(2),
-            Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
+            [
+                TextInput::make('name')->minLength(2)->maxLength(255)->required(),
+                Textarea::make('description')->required(),
+                TextInput::make('url')->label('Url to Notify')->url()->required(),
+                Select::make('method')->options(
+                    [
+                        'post' => 'Post',
+                        'get' => 'Get',
+                    ]
+                )->required(),
+                TextInput::make('model')->required(),
+                KeyValue::make('header'),
+                Radio::make('data_option')->options(
+                    [
+                        'all' => 'All Model Data',
+                        'summary' => 'Summary',
+                    ]
+                )->descriptions(
+                    [
+                        'all' => 'All Data of the event triggered',
+                        'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
+                    ]
+                )->columns(2)->required(),
+                CheckboxList::make('events')
+                    ->options([
+                        'created' => 'Created',
+                        'updated' => 'Updated',
+                        'deleted' => 'Deleted',
+                        'restored' => 'Restored',
+                        'forceDeleted' => 'Force Deleted',
+                    ])
+                    ->columns(2),
+                Radio::make('verifySsl')->label('Verify SSL?')->boolean()->inline()->required(),
 
-        ]
+            ]
         ),
         ];
     }

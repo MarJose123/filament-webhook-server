@@ -2,7 +2,6 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
-
 use Filament\Pages\Page;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -29,17 +28,11 @@ class WebhookHistory extends Page implements HasTable
 
     public function mount()
     {
-
-     if(config('filament-webhook-server.webhook.keep_history')){
-         $this->webhookClient_Id = request('client_id');
-         /* Abort the request if the  is empty */
-//         abort_unless(isset($this->webhookClient_Id), 403);
-
-     }else{
-         $this->redirect(url()->previous());
-     }
-
-
+        if (config('filament-webhook-server.webhook.keep_history')) {
+            $this->webhookClient_Id = request('client_id');
+        } else {
+            $this->redirect(url()->previous());
+        }
     }
 
     protected function getTableQuery(): Builder
@@ -67,5 +60,4 @@ class WebhookHistory extends Page implements HasTable
     {
         return 'No transaction log yet';
     }
-
 }

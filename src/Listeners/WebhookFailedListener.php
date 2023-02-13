@@ -14,7 +14,7 @@ class WebhookFailedListener
 
     public function handle(WebhookCallFailedEvent $event)
     {
-        if(config('filament-webhook-server.webhook.keep_history')){
+        if (config('filament-webhook-server.webhook.keep_history')) {
             try {
                 $webhookClientHistory = new FilamentWebhookServerHistory();
                 $webhookClientHistory->webhook_client = $event->meta['webhookClient'];
@@ -24,7 +24,7 @@ class WebhookFailedListener
                 $webhookClientHistory->errorType = $event->errorType;
                 $webhookClientHistory->attempt = $event->attempt;
                 $res = $webhookClientHistory->save();
-            }catch (\Exception $error){
+            } catch (\Exception $error) {
                 Log::info(print_r($error, true));
             }
         }

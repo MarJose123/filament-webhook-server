@@ -10,7 +10,7 @@ use Spatie\WebhookServer\Events\WebhookCallSucceededEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
-    protected $listen  = [
+    protected $listen = [
         WebhookCallSucceededEvent::class => [
             WebhookSuccessListener::class,
         ],
