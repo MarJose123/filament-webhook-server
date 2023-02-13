@@ -22,4 +22,9 @@ class FilamentWebhookServer extends Model
         'header' => 'array',
         'events' => 'array',
     ];
+
+    public function transactionlogs()
+    {
+        return $this->hasMany(FilamentWebhookServerHistory::class, 'webhook_client', 'id');
+    }
 }
