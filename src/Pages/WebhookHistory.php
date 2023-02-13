@@ -27,13 +27,20 @@ class WebhookHistory extends Page implements HasTable
 
     public function mount()
     {
-     $this->webhookClient_Id = request('client_id');
 
+     if(config('filament-webhook-server.webhook.keep_history')){
+         $this->webhookClient_Id = request('client_id');
+         /* Abort the request if the  is empty */
+         abort_unless(isset($this->webhookClient_Id), 403);
+
+     }
+
+      $this->redirect(url()->previous());
     }
 
     protected function getTableQuery(): Builder
     {
-        return FilamentWebhookServerHistory::query();
+        return FilamentWebhookServerHistory::query()->where('webhook_client', '=', $this->webhookClient_Id);
     }
 
     protected function getTableColumns(): array
