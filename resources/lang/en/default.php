@@ -14,6 +14,9 @@ return [
             'button' => [
                 'create' => 'Create'
             ]
+        ],
+        'history' => [
+            'heading' => 'Webhook Transaction Logs'
         ]
     ],
     'notification' => [
