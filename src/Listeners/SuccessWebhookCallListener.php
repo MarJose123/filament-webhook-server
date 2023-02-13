@@ -27,7 +27,6 @@ class SuccessWebhookCallListener
             $webhookClientHistory->errorType = $event->errorType;
             $webhookClientHistory->attempt = $event->attempt;
             $res = $webhookClientHistory->save();
-            ddd($res);
         }
     }
 }
