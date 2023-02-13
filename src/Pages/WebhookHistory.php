@@ -42,11 +42,7 @@ class WebhookHistory extends Page implements HasTable
 
     protected function getTableEmptyStateHeading(): ?string
     {
-        return 'No posts yet';
+        return 'No transaction log yet';
     }
 
-    protected function getTableEmptyStateDescription(): ?string
-    {
-        return 'You may create a post using the button below.';
-    }
 }
