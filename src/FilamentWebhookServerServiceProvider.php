@@ -5,6 +5,7 @@ namespace Marjose123\FilamentWebhookServer;
 use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
+use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Marjose123\FilamentWebhookServer\Providers\EventServiceProvider;
 use Spatie\LaravelPackageTools\Package;
@@ -19,6 +20,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
 
     protected array $pages = [
         Webhooks::class,
+        WebhookHistory::class
     ];
 
     protected array $widgets = [
