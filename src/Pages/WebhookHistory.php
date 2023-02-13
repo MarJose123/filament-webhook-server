@@ -18,9 +18,17 @@ class WebhookHistory extends Page implements HasTable
 
     protected static bool $shouldRegisterNavigation = false;
 
+    protected string $webhookClient_Id;
+
     protected function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.history.heading');
+    }
+
+    public function mount()
+    {
+     $this->webhookClient_Id = request('client_id');
+
     }
 
     protected function getTableQuery(): Builder

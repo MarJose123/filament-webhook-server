@@ -13,9 +13,7 @@ class FailedWebhookCallListener
 
     public function handle(FinalWebhookCallFailedEvent $event)
     {
-
-        if(config('filament-webhook-server.webhook.keep_history', true))
-        {
+        if (config('filament-webhook-server.webhook.keep_history', true)) {
             $webhookClientHistory = new FilamentWebhookServerHistory();
             $webhookClientHistory->webhook_client = $event->meta['webhookClient'];
             $webhookClientHistory->uuid = $event->uuid;

@@ -1,28 +1,29 @@
 <?php
+
 return [
     'pages' => [
         'heading' => 'Webhook',
         'navigation' => [
             'label' => 'Webhook',
-            'group' => 'Developer'
+            'group' => 'Developer',
         ],
         'button' => [
-            'add_new_webhook' => 'Add New Webhook'
+            'add_new_webhook' => 'Add New Webhook',
         ],
         'modal' => [
             'label' => 'Add New Webhook',
             'button' => [
-                'create' => 'Create'
-            ]
+                'create' => 'Create',
+            ],
         ],
         'history' => [
-            'heading' => 'Webhook Transaction Logs'
-        ]
+            'heading' => 'Webhook Transaction Logs',
+        ],
     ],
     'notification' => [
         'create' => [
-            'success' => 'New Webhook successfully created!'
-        ]
-    ]
+            'success' => 'New Webhook successfully created!',
+        ],
+    ],
 
 ];

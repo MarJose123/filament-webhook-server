@@ -4,7 +4,6 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Marjose123\FilamentWebhookServer\Providers\EventServiceProvider;
@@ -19,7 +18,7 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     ];
 
     protected array $pages = [
-        Webhooks::class
+        Webhooks::class,
     ];
 
     protected array $widgets = [
@@ -27,11 +26,11 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     ];
 
     protected array $styles = [
-//        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.css',
+        //        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.css',
     ];
 
     protected array $scripts = [
-//        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.js',
+        //        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.js',
     ];
 
     // protected array $beforeCoreScripts = [
@@ -56,18 +55,20 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
     public function boot()
     {
         parent::boot();
-       self::registerGlobalObserver();
+        self::registerGlobalObserver();
     }
+
     private static function registerGlobalObserver()
     {
         /** @var Model[] $MODELS */
         $MODELS = [
-            config('filament-webhook-server.models')
+            config('filament-webhook-server.models'),
         ];
 
-        foreach ($MODELS as $MODEL) foreach ($MODEL as $model)
-        {
-            $model::observe(ModelObserver::class);
+        foreach ($MODELS as $MODEL) {
+            foreach ($MODEL as $model) {
+                $model::observe(ModelObserver::class);
+            }
         }
     }
 }

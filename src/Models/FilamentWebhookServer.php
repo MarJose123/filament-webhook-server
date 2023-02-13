@@ -16,8 +16,9 @@ class FilamentWebhookServer extends Model
         'data_option',
         'verifySsl',
         'status',
-        'events'
+        'events',
     ];
+
     protected $casts = [
         'header' => 'array',
         'events' => 'array',
