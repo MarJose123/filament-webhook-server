@@ -5,6 +5,8 @@ namespace Marjose123\FilamentWebhookServer\Pages;
 use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Illuminate\Database\Eloquent\Builder;
+use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
 
 class WebhookHistory extends Page implements HasTable
 {
@@ -16,6 +18,18 @@ class WebhookHistory extends Page implements HasTable
     protected function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.history.heading');
+    }
+
+    protected function getTableQuery(): Builder
+    {
+        return FilamentWebhookServerHistory::query();
+    }
+
+    protected function getTableColumns(): array
+    {
+        return  [
+
+        ];
     }
 
 }
