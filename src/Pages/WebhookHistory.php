@@ -2,9 +2,9 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\TextInput;
+
 use Filament\Pages\Page;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +14,7 @@ class WebhookHistory extends Page implements HasTable
 {
     use InteractsWithTable;
 
-    protected static string $view = 'filament-webhook-server::pages.webhooks-histories';
+    protected static string $view = 'filament-webhook-server::pages.webhook-histories';
 
     protected static ?string $title = 'Webhook Transaction Logs';
 
@@ -33,11 +33,11 @@ class WebhookHistory extends Page implements HasTable
      if(config('filament-webhook-server.webhook.keep_history')){
          $this->webhookClient_Id = request('client_id');
          /* Abort the request if the  is empty */
-         abort_unless(isset($this->webhookClient_Id), 403);
+//         abort_unless(isset($this->webhookClient_Id), 403);
 
      }
 
-      $this->redirect(url()->previous());
+//      $this->redirect(url()->previous());
     }
 
     protected function getTableQuery(): Builder
@@ -48,13 +48,11 @@ class WebhookHistory extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return  [
-            Grid::make(1)->schema([
-                TextInput::make('uuid'),
-                TextInput::make('status_code'),
-                TextInput::make('errorMessage'),
-                TextInput::make('errorType'),
-                TextInput::make('attempt'),
-            ])
+            TextColumn::make('uuid'),
+            TextColumn::make('status_code'),
+            TextColumn::make('errorMessage'),
+            TextColumn::make('errorType'),
+            TextColumn::make('attempt'),
         ];
     }
 
