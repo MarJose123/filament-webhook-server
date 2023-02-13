@@ -11,8 +11,11 @@ use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
 class WebhookHistory extends Page implements HasTable
 {
     use InteractsWithTable;
+
     protected static string $view = 'filament-webhook-server::pages.webhooks-histories';
+
     protected static ?string $title = 'Webhook Transaction Logs';
+
     protected static bool $shouldRegisterNavigation = false;
 
     protected function getHeading(): string
@@ -32,4 +35,18 @@ class WebhookHistory extends Page implements HasTable
         ];
     }
 
+    protected function getTableEmptyStateIcon(): ?string
+    {
+        return 'heroicon-o-bookmark';
+    }
+
+    protected function getTableEmptyStateHeading(): ?string
+    {
+        return 'No posts yet';
+    }
+
+    protected function getTableEmptyStateDescription(): ?string
+    {
+        return 'You may create a post using the button below.';
+    }
 }
