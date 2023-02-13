@@ -18,6 +18,7 @@ return [
         ],
         'history' => [
             'heading' => 'Webhook Transaction Logs',
+            'back' => 'Go Back'
         ],
     ],
     'notification' => [

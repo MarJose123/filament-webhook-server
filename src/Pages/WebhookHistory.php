@@ -7,6 +7,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Actions\Action;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
 
 class WebhookHistory extends Page implements HasTable
@@ -50,6 +51,27 @@ class WebhookHistory extends Page implements HasTable
             TextColumn::make('attempt'),
         ];
     }
+    protected function getTableActions(): array
+    {
+        return [
+            Action::make('Go Back')
+                ->url(Webhooks::getUrl())
+        ];
+    }
+    protected function getActions(): array
+    {
+        return [
+            \Filament\Pages\Actions\Action::make('Go Back')
+                ->button()
+                ->icon('heroicon-o-arrow-narrow-left')
+                ->label(
+                    __(
+                        'filament-webhook-server::default.pages.history.back'
+                    )
+                )
+                ->url(Webhooks::getUrl()),
+        ];
+    }
 
     protected function getTableEmptyStateIcon(): ?string
     {
@@ -59,5 +81,9 @@ class WebhookHistory extends Page implements HasTable
     protected function getTableEmptyStateHeading(): ?string
     {
         return 'No transaction log yet';
+    }
+    protected function getTablePollingInterval(): ?string
+    {
+        return config('filament-webhook-server.polling', '10s');
     }
 }
