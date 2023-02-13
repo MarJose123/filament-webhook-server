@@ -1,22 +1,20 @@
 <?php
 
-namespace Marjose123\FilamentWebhookServer\Providers;
+namespace Marjose123\FilamentWebhookServer;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
-use Marjose123\FilamentWebhookServer\Events\Listeners\FailedWebhookCallListener;
-use Marjose123\FilamentWebhookServer\Events\Listeners\SuccessWebhookCallListener;
+use Marjose123\FilamentWebhookServer\Listeners\WebhookSuccessListener;
 use Spatie\WebhookServer\Events\FinalWebhookCallFailedEvent;
 use Spatie\WebhookServer\Events\WebhookCallSucceededEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
-    protected $listen = [
+    protected $listen  = [
         WebhookCallSucceededEvent::class => [
-            SuccessWebhookCallListener::class,
+            WebhookSuccessListener::class,
         ],
         FinalWebhookCallFailedEvent::class => [
-            FailedWebhookCallListener::class,
+//            FailedWebhookCallListener::class,
         ],
     ];
 

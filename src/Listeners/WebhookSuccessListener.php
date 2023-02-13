@@ -14,18 +14,16 @@ class WebhookSuccessListener
 
     public function handle(WebhookCallSucceededEvent $event)
     {
-        /*
-          $webhookClientHistory = new FilamentWebhookServerHistory();
-            $webhookClientHistory->webhook_client = $event->meta['webhookClient'];
-            $webhookClientHistory->uuid = $event->uuid;
-            $webhookClientHistory->status_code = $event->response->getStatusCode();
-            $webhookClientHistory->errorMessage = $event->response->getReasonPhrase();
-            $webhookClientHistory->errorType = $event->errorType;
-            $webhookClientHistory->attempt = $event->attempt;
-            $res = $webhookClientHistory->save();
-         */
-
-        Log::info('aasdas');
+        $webhookClientHistory = new FilamentWebhookServerHistory();
+        $webhookClientHistory->webhook_client = $event->meta['webhookClient'];
+        $webhookClientHistory->uuid = $event->uuid;
+        $webhookClientHistory->status_code = $event->response->getStatusCode();
+        $webhookClientHistory->errorMessage = $event->response->getReasonPhrase();
+        $webhookClientHistory->errorType = $event->errorType;
+        $webhookClientHistory->attempt = $event->attempt;
+        $res = $webhookClientHistory->save();
+        Log::info($res);
+        Log::info((string) $event);
 
     }
 }
