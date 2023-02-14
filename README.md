@@ -54,7 +54,7 @@ return [
 You can customise the polling interval for the `Webhook-Server` by publishing the configuration file and updating the `polling` value.
 
 ## Webhook payload Structure
-```json
+```
 [
   {
     "event": "created",  // <== Type of Event
