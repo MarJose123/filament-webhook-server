@@ -107,11 +107,13 @@ class Webhooks extends Page implements HasTable
                     [
                         'all' => 'All Model Data',
                         'summary' => 'Summary',
+                        'custom' => 'Custom',
                     ]
                 )->descriptions(
                     [
                         'all' => 'All Data of the event triggered',
                         'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
+                        'custom' => 'Only data defined on model`s toWebhookPayload method',
                     ]
                 )->columns(2)->required(),
                 CheckboxList::make('events')
@@ -154,11 +156,13 @@ class Webhooks extends Page implements HasTable
                     [
                         'all' => 'All Model Data',
                         'summary' => 'Summary',
+                        'custom' => 'Custom',
                     ]
                 )->descriptions(
                     [
                         'all' => 'All Data of the event triggered',
                         'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
+                        'custom' => 'Only data defined on model`s toWebhookPayload method',
                     ]
                 )->columns(2)->required(),
                 CheckboxList::make('events')

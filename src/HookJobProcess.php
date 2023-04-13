@@ -30,33 +30,16 @@ class HookJobProcess
     public function send(): void
     {
         foreach ($this->search as $webhookClient) {
-            switch ($webhookClient->data_option) {
-                case 'summary':
-                    WebhookCall::create()
-                        ->url($webhookClient->url)
-                        ->maximumTries(3)
-                        ->meta(['webhookClient' => $webhookClient->id])
-                        ->doNotSign()
-                        ->useHttpVerb($webhookClient->method)
-                        ->verifySsl($webhookClient->verifySsl)
-                        ->withHeaders($webhookClient->header)
-                        ->payload([$this->payloadSummary($this->model, $this->event, $this->module)])
-                        ->dispatchSync();
-
-                    break;
-                case 'all':
-                    WebhookCall::create()
-                         ->url($webhookClient->url)
-                         ->maximumTries(3)
-                         ->meta(['webhookClient' => $webhookClient->id])
-                         ->doNotSign()
-                         ->useHttpVerb($webhookClient->method)
-                         ->verifySsl($webhookClient->verifySsl)
-                         ->withHeaders($webhookClient->header)
-                         ->payload([$this->payloadAll($this->model, $this->event, $this->module)])
-                         ->dispatchSync();
-                    break;
-            }
+            WebhookCall::create()
+                ->url($webhookClient->url)
+                ->maximumTries(3)
+                ->meta(['webhookClient' => $webhookClient->id])
+                ->doNotSign()
+                ->useHttpVerb($webhookClient->method)
+                ->verifySsl($webhookClient->verifySsl)
+                ->withHeaders($webhookClient->header)
+                ->payload([$this->payload($this->model, $this->event, $this->module,$webhookClient->data_option)])
+                ->dispatchSync();
         }
     }
 }

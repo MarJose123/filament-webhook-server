@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApiResponseBuilder
 {
-    private array|null|object $payload;
+    private Model $model;
 
     private ?string $message;
+
+    private ?string $dataOption;
 
     private ?string $event;
 
@@ -21,9 +23,9 @@ class ApiResponseBuilder
             ->setMessage(null);
     }
 
-    public function setModelData(Model $model): static
+    public function setModel(Model $model): static
     {
-        $this->payload = (object) $model->attributesToArray();
+        $this->model = $model;
 
         return $this;
     }
@@ -49,27 +51,33 @@ class ApiResponseBuilder
         return $this;
     }
 
-    public function setSummaryModelData(Model $model): static
+    public function setDataOption(string $dataOption): static
     {
-        $payload = [
-            'id' => $model->id ?? $model->uuid ?? null,
-            'created_at' => $model->created_at ?? Carbon::now()->timezone(config('app.timezone')),
-            'updated_at' => $model->updated_at ?? null,
-        ];
-        $this->payload = (object) $payload;
+        $this->dataOption = $dataOption;
 
-        return  $this;
+        return $this;
     }
 
     public function generate()
     {
+        $payload = match ($this->dataOption) {
+            'summary' => [
+                'id'         => $this->model->id ?? $this->model->uuid ?? null,
+                'created_at' => $this->model->created_at ?? Carbon::now()->timezone(config('app.timezone')),
+                'updated_at' => $this->model->updated_at ?? null,
+            ],
+            'all' => (object)$this->model->attributesToArray(),
+            'custom' => method_exists($this->model, 'toWebhookPayload')
+                ? (object)$this->model->toWebhookPayload() : [],
+            default => [],
+        };
         $apiReponse = [
             'event' => $this->event ?? null,
             'module' => $this->module,
             'triggered_at' => Carbon::now()->timezone(config('app.timezone')),
-            'data' => $this->payload,
+            'data' => $payload,
         ];
 
-        return (object) $apiReponse;
+        return (object)$apiReponse;
     }
 }
