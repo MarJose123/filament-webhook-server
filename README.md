@@ -60,12 +60,22 @@ You can customise the polling interval for the `Webhook-Server` by publishing th
     "event": "created",  // <== Type of Event
     "module": "Testing", // <== Module that were the event happend
     "triggered_at": "2023-01-18T05:07:37.748031Z", // <== Based on the Date and time the Event happen
-    "data": { // <== Actual information depending on what you selected "Summary or All"
+    "data": { // <== Actual information depending on what you selected "Summary, All or Custom"
       "id": 34,
       "created_at": "2023-01-18T05:07:37.000000Z"
     }
   }
 ]
+```
+for custom option you need to create toWebhookPayload method in your models
+
+```
+public function toWebhookPayload()
+{
+    return [
+        'customAttribute' => $this->yourAttribute
+    ];
+}
 ```
 
 ## Testing

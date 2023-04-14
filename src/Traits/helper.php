@@ -19,21 +19,13 @@ trait helper
         return $models;
     }
 
-    public function payloadAll(Model $model, $event, $module): object|array
+    public function payload(Model $model, $event, $module, $dataOption = 'summary'): object|array
     {
         return ApiResponseBuilder::create()
-                ->setModelData($model)
-                ->setEvent($event)
-                ->setModule($module)
-                ->generate();
-    }
-
-    public function payloadSummary(Model $model, $event, $module): object|array
-    {
-        return ApiResponseBuilder::create()
-            ->setSummaryModelData($model)
-            ->setEvent($event)
-            ->setModule($module)
-            ->generate();
+                                 ->setModel($model)
+                                 ->setDataOption($dataOption)
+                                 ->setEvent($event)
+                                 ->setModule($module)
+                                 ->generate();
     }
 }
