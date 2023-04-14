@@ -2,6 +2,18 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 1.2.0 - 2023-04-14
+
+### What's Changed
+
+- feat: add custom webhook payload and support to Laravel 10 by @jeffersonGlemos in https://github.com/MarJose123/filament-webhook-server/pull/6
+
+### New Contributors
+
+- @jeffersonGlemos made their first contribution in https://github.com/MarJose123/filament-webhook-server/pull/6
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/1.1.0...1.2.0
+
 ## 1.1.0 - 2023-02-13
 
 ### Reminder
@@ -25,15 +37,18 @@ return [
     ],
 ];
 
+
 ```
 - Republish and run the migrations with:
 
 ```bash
 php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
+
 ```
 ```bash
 php artisan migrate
+
 
 ```
 to be able to add the new table
