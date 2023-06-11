@@ -5,8 +5,6 @@ namespace Marjose123\FilamentWebhookServer;
 use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
-use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
-use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Spatie\LaravelPackageTools\Exceptions\InvalidPackage;
 use Spatie\LaravelPackageTools\Package;
 
@@ -18,10 +16,10 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
         // CustomResource::class,
     ];
 
-    protected array $pages = [
-        Webhooks::class,
-        WebhookHistory::class,
-    ];
+    public function getPages(): array
+    {
+        return config('filament-webhook-server.pages');
+    }
 
     protected array $widgets = [
         // CustomWidget::class,
