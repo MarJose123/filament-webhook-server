@@ -2,6 +2,15 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 1.2.2 - 2023-07-06
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/MarJose123/filament-webhook-server/pull/11
+- Update WebhookHistory.php by @MarJose123 in https://github.com/MarJose123/filament-webhook-server/pull/12
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/1.2.1...1.2.2
+
 ## 1.2.1 - 2023-06-11
 
 ### What's Changed
@@ -53,6 +62,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -61,9 +71,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
