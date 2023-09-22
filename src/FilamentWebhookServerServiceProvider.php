@@ -2,40 +2,20 @@
 
 namespace Marjose123\FilamentWebhookServer;
 
-use Filament\PluginServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Spatie\LaravelPackageTools\Exceptions\InvalidPackage;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentWebhookServerServiceProvider extends PluginServiceProvider
+class FilamentWebhookServerServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-webhook-server';
-
-    protected array $resources = [
-        // CustomResource::class,
-    ];
 
     public function getPages(): array
     {
         return config('filament-webhook-server.pages');
     }
-
-    protected array $widgets = [
-        // CustomWidget::class,
-    ];
-
-    protected array $styles = [
-        //        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.css',
-    ];
-
-    protected array $scripts = [
-        //        'plugin-filament-webhook-server' => __DIR__.'/../resources/dist/filament-webhook-server.js',
-    ];
-
-    // protected array $beforeCoreScripts = [
-    //     'plugin-filament-webhook-server' => __DIR__ . '/../resources/dist/filament-webhook-server.js',
-    // ];
 
     public function configurePackage(Package $package): void
     {
@@ -46,22 +26,23 @@ class FilamentWebhookServerServiceProvider extends PluginServiceProvider
                 ->hasViews();
     }
 
+
     /**
      * @throws InvalidPackage
      */
-    public function register()
+    public function register(): void
     {
         parent::register();
         $this->app->register(EventServiceProvider::class);
     }
 
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
         self::registerGlobalObserver();
     }
 
-    private static function registerGlobalObserver()
+    private static function registerGlobalObserver(): void
     {
         /** @var Model[] $MODELS */
         $MODELS = [

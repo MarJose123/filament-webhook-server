@@ -10,9 +10,9 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -31,12 +31,12 @@ class Webhooks extends Page implements HasTable
 
     public ?array $data = ['header' => null];
 
-    protected function getHeading(): string
+    public function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.heading');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-webhook-server::default.pages.navigation.group');
     }
@@ -46,7 +46,7 @@ class Webhooks extends Page implements HasTable
         $this->form->fill();
     }
 
-    protected static function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('filament-webhook-server::default.pages.navigation.label');
     }
