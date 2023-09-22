@@ -2,6 +2,14 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 2.0.0 - Support Filament v3 - 2023-09-22
+
+### What's Changed
+
+- Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/MarJose123/filament-webhook-server/pull/13
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/1.2.2...2.0.0
+
 ## 1.2.2 - 2023-07-06
 
 ### What's Changed
@@ -63,6 +71,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -72,9 +81,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
