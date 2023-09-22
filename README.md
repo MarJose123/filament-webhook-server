@@ -8,14 +8,14 @@
 This package provides a Filament page that you can send webhook server . You'll find installation instructions and full documentation on [spatie/laravel-webhook-server](https://github.com/spatie/laravel-webhook-server).
 
 ---
-:rotating_light: _For Filament V3 Support is under development and not yet working._
+:rotating_light: _For latest version that support FilamentPhp v2.x use this branch [1.x](https://github.com/MarJose123/filament-webhook-server/tree/1.x)_
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require marjose123/filament-webhook-server
+composer require marjose123/filament-webhook-server:"^2.0"
 ```
 
 You can publish and run the migrations with:
