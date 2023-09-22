@@ -65,7 +65,7 @@ class WebhookHistory extends Page implements HasTable
         return [
             \Filament\Pages\Actions\Action::make('Go Back')
                 ->button()
-                ->icon('heroicon-o-arrow-narrow-left')
+                ->icon('heroicon-o-arrow-left-circle')
                 ->label(
                     __(
                         'filament-webhook-server::default.pages.history.back'

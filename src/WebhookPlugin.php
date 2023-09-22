@@ -17,10 +17,7 @@ class WebhookPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->pages([
-            Webhooks::class,
-            WebhookHistory::class,
-        ]);
+        $panel->pages(config('filament-webhook-server.pages'));
     }
 
     public static function make(): static
