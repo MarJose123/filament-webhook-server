@@ -22,7 +22,7 @@ class WebhookHistory extends Page implements HasTable
 
     public string|null $webhookClient_Id;
 
-    protected function getHeading(): string
+    public function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.history.heading');
     }

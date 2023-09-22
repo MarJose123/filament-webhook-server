@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.0 || ^8.1 || ^8.2",
+        "codeat3/blade-google-material-design-icons": "^1.18",
         "filament/filament": "^3.0",
         "illuminate/contracts": "^9.0 || ^10.0",
         "spatie/laravel-model-info": "^1.4",

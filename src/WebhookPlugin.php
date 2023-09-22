@@ -4,6 +4,8 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
+use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 
 class WebhookPlugin implements Plugin
 {
@@ -16,7 +18,8 @@ class WebhookPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->pages([
-            config('filament-webhook-server.pages')
+            Webhooks::class,
+            WebhookHistory::class,
         ]);
     }
 

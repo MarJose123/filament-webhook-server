@@ -10,11 +10,9 @@
         {{$this->form}}
 
         <x-slot name="footerActions" style="padding-top: 40px;">
-            <x-filament::modal.actions>
-                <x-filament::button wire:click="create" color="primary">
-                    {{ __('filament-webhook-server::default.pages.modal.button.create') }}
-                </x-filament::button>
-            </x-filament::modal.actions>
+            <x-filament::button wire:click="create" color="primary">
+                {{ __('filament-webhook-server::default.pages.modal.button.create') }}
+            </x-filament::button>
         </x-slot>
     </x-filament::modal>
 </x-filament-panels::page>

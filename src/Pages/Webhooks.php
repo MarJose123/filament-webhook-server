@@ -2,6 +2,7 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Filament\Actions\Action;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Grid;
@@ -12,7 +13,6 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -25,7 +25,7 @@ class Webhooks extends Page implements HasTable
     use helper;
     use InteractsWithTable;
 
-    protected static ?string $navigationIcon = 'heroicon-o-status-online';
+    protected static ?string $navigationIcon = 'gmdi-webhook';
 
     protected static string $view = 'filament-webhook-server::pages.webhooks';
 
@@ -233,7 +233,7 @@ class Webhooks extends Page implements HasTable
 
     protected function getTableEmptyStateIcon(): ?string
     {
-        return 'heroicon-o-status-offline';
+        return 'gmdi-webhook';
     }
 
     protected function getTableEmptyStateHeading(): ?string
