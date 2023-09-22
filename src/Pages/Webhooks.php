@@ -11,6 +11,7 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Tables;
 use Filament\Tables\Columns\BooleanColumn;
@@ -67,7 +68,7 @@ class Webhooks extends Page implements HasTable
 
     public function openCreateModal(): void
     {
-        $this->dispatchBrowserEvent('open-modal', ['id' => 'create-webhook']);
+        $this->dispatch('open-modal', id: 'create-webhook');
     }
 
     public function create(): void
@@ -84,8 +85,11 @@ class Webhooks extends Page implements HasTable
         $webhookModel->events = $data['events'];
         $webhookModel->verifySsl = $data['verifySsl'];
         $webhookModel->save();
-        $this->dispatchBrowserEvent('close-modal', ['id' => 'create-webhook']);
-        $this->notify('success', __('filament-webhook-server::default.notification.create.success'));
+        $this->dispatch('close-modal', id: 'create-webhook');
+        Notification::make()
+                ->success()
+                ->body(__('filament-webhook-server::default.notification.create.success'))
+                ->send();
     }
 
     protected function getFormSchema(): array

@@ -2,7 +2,7 @@
     <div>
         {{ $this->table }}
     </div>
-    <x-filament::modal id="create-webhook" width="lg"  alignment="center" :close-by-clicking-away="false">
+    <x-filament::modal id="create-webhook" width="lg"  alignment="center" footer-actions-alignment="center" :close-by-clicking-away="false">
         <x-slot name="heading">
             <h3 class="text-xl">{{ __('filament-webhook-server::default.pages.modal.label') }}</h3>
         </x-slot>
