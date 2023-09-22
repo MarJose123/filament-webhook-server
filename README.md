@@ -8,7 +8,7 @@
 This package provides a Filament page that you can send webhook server . You'll find installation instructions and full documentation on [spatie/laravel-webhook-server](https://github.com/spatie/laravel-webhook-server).
 
 ---
-:rotating_light: _For latest version that support FilamentPhp v2.x use this branch [1.x](https://github.com/MarJose123/filament-webhook-server/tree/1.x)_
+:rotating_light: _For latest version that support FilamentPhp v2.x use this branch [1.x](https://github.com/MarJose123/filament-webhook-server/tree/1.x)_or released version "^1.0"
 
 ## Installation
 
@@ -47,6 +47,24 @@ return [
 ];
 
 ```
+
+Add the plugin to your panel and you're ready to go
+```php
+
+use Marjose123\FilamentWebhookServer\WebhookPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // ...
+        ->plugins([
+               WebhookPlugin::make() // <- Add this
+        ]);  
+       
+}
+
+```
+
 
 ## Usage
 > 1. Add the models that you want to be part of the webhook
