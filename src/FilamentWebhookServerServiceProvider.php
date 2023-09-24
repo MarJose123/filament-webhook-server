@@ -2,7 +2,7 @@
 
 namespace Marjose123\FilamentWebhookServer;
 
-use Filament\PluginServiceProvider;
+use Filament\PackageServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
@@ -10,7 +10,7 @@ use Marjose123\FilamentWebhookServer\Pages\Webhooks;
 use Spatie\LaravelPackageTools\Exceptions\InvalidPackage;
 use Spatie\LaravelPackageTools\Package;
 
-class FilamentWebhookServerServiceProvider extends PluginServiceProvider
+class FilamentWebhookServerServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-webhook-server';
 
