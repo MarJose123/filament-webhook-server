@@ -22,6 +22,7 @@ class FilamentWebhookServer extends Model
     protected $casts = [
         'header' => 'array',
         'events' => 'array',
+        'verifySsl' => 'boolean',
     ];
 
     public function transactionlogs()
