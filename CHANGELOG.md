@@ -2,6 +2,20 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 2.0.1 - 2024-02-21
+
+### What's Changed
+
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/MarJose123/filament-webhook-server/pull/17
+* Bump actions/dependency-review-action from 3 to 4 by @dependabot in https://github.com/MarJose123/filament-webhook-server/pull/18
+* Added boolean cast for verifySsl by @soixt in https://github.com/MarJose123/filament-webhook-server/pull/21
+
+### New Contributors
+
+* @soixt made their first contribution in https://github.com/MarJose123/filament-webhook-server/pull/21
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/2.0.0...2.0.1
+
 ## 2.0.0 - Support Filament v3 - 2023-09-22
 
 ### What's Changed
@@ -72,6 +86,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -82,9 +97,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
