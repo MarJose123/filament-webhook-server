@@ -7,9 +7,7 @@ return [
     /*
      *  Models that you want to be part of the webhooks options
      */
-    'models' => [
-        \App\Models\User::class,
-    ],
+    'models' => [],
     /*
      */
     'polling' => '10s',
