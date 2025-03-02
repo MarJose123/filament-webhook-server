@@ -2,6 +2,19 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 2.1.7 - 2025-03-02
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/MarJose123/filament-webhook-server/pull/37
+* Add ability to add Cluster to pages by @AidanLaycock in https://github.com/MarJose123/filament-webhook-server/pull/40
+
+### New Contributors
+
+* @AidanLaycock made their first contribution in https://github.com/MarJose123/filament-webhook-server/pull/40
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/2.1.6...2.1.7
+
 ## 2.1.6 - 2024-11-14
 
 ### What's Changed
@@ -161,6 +174,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -179,9 +193,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
