@@ -26,6 +26,14 @@ class Webhooks extends Page implements HasTable
     use helper;
     use InteractsWithTable;
 
+    /**
+     * @return string|null
+     */
+    public static function getCluster(): ?string
+    {
+        return config('filament-webhook-server.cluster');
+    }
+
     public static function getNavigationIcon(): string
     {
         return config('filament-webhook-server.navigation.icon') ?? 'heroicon-s-arrow-up-on-square-stack';

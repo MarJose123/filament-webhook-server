@@ -16,6 +16,10 @@ return [
     'webhook' => [
         'keep_history' => false,
     ],
+    /*
+    * Use to put pages within Clusters
+    */
+    'cluster' => null,
     'pages' => [
         Webhooks::class,
         WebhookHistory::class,

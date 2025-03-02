@@ -14,6 +14,14 @@ class WebhookHistory extends Page implements HasTable
 {
     use InteractsWithTable;
 
+    /**
+     * @return string|null
+     */
+    public static function getCluster(): ?string
+    {
+        return config('filament-webhook-server.cluster');
+    }
+
     protected static string $view = 'filament-webhook-server::pages.webhook-histories';
 
     protected static ?string $title = 'Webhook Transaction Logs';
