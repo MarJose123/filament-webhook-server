@@ -22,7 +22,7 @@ class FilamentWebhookServerServiceProvider extends PackageServiceProvider
         $package->name(static::$name)
                 ->hasConfigFile()
                 ->hasTranslations()
-                ->hasMigrations(['create_filament-webhook-server_table', '2023_01_19_144816_create_filament_webhook_server_histories_table'])
+                ->hasMigrations(['create_filament-webhook-server_table', 'create_filament_webhook_server_histories_table'])
                 ->hasViews();
     }
 
