@@ -2,6 +2,20 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 2.2.0 - 2025-03-24
+
+### What's Changed
+
+* Support for Laravel 12 by @DALIHILLARY in https://github.com/MarJose123/filament-webhook-server/pull/41
+* Fix/history by @DALIHILLARY in https://github.com/MarJose123/filament-webhook-server/pull/42
+* Feat/navigation sort by @DALIHILLARY in https://github.com/MarJose123/filament-webhook-server/pull/43
+
+### New Contributors
+
+* @DALIHILLARY made their first contribution in https://github.com/MarJose123/filament-webhook-server/pull/41
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/2.1.7...2.2.0
+
 ## 2.1.7 - 2025-03-02
 
 ### What's Changed
@@ -175,6 +189,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -194,9 +209,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
