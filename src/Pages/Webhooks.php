@@ -53,6 +53,12 @@ class Webhooks extends Page implements HasTable
         return __('filament-webhook-server::default.pages.navigation.group');
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return config('filament-webhook-server.navigation.sort') ?? 0;
+    }
+
+
     public function mount(): void
     {
         $this->form->fill();
