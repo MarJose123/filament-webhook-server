@@ -48,7 +48,7 @@
     "scripts": {
         "test:pest": "vendor/bin/pest --parallel",
         "rector": "vendor/bin/rector process --ansi",
-        "rector:check": "vendor/bin/rector process --dry-run --ansi",
+        "rector:check": "vendor/bin/rector process --dry-run --ansi"
     },
     "config": {
         "sort-packages": true,

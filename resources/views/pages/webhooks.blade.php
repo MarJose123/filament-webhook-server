@@ -1,6 +1,6 @@
 <x-filament-panels::page>
     <div>
-        {{ $this->table }}
+        {{ $this->content }}
     </div>
     <x-filament::modal id="create-webhook" width="lg"  alignment="center" footer-actions-alignment="center" :close-by-clicking-away="false">
         <x-slot name="heading">

@@ -19,7 +19,7 @@ class ApiResponseBuilder
 
     public static function create(): ApiResponseBuilder
     {
-        return (new static())
+        return (new static)
             ->setMessage(null);
     }
 
@@ -30,14 +30,14 @@ class ApiResponseBuilder
         return $this;
     }
 
-    public function setModule($module): static
+    public function setModule(?string $module): static
     {
         $this->module = $module;
 
         return $this;
     }
 
-    public function setEvent($event): static
+    public function setEvent(?string $event): static
     {
         $this->event = $event;
 
@@ -62,13 +62,13 @@ class ApiResponseBuilder
     {
         $payload = match ($this->dataOption) {
             'summary' => [
-                'id'         => $this->model->id ?? $this->model->uuid ?? null,
+                'id' => $this->model->id ?? $this->model->uuid ?? null,
                 'created_at' => $this->model->created_at ?? Carbon::now()->timezone(config('app.timezone')),
                 'updated_at' => $this->model->updated_at ?? null,
             ],
-            'all' => (object)$this->model->attributesToArray(),
+            'all' => (object) $this->model->attributesToArray(),
             'custom' => method_exists($this->model, 'toWebhookPayload')
-                ? (object)$this->model->toWebhookPayload() : [],
+                ? (object) $this->model->toWebhookPayload() : [],
             default => [],
         };
         $apiReponse = [
@@ -78,6 +78,6 @@ class ApiResponseBuilder
             'data' => $payload,
         ];
 
-        return (object)$apiReponse;
+        return (object) $apiReponse;
     }
 }

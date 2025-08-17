@@ -2,6 +2,8 @@
 
 namespace Marjose123\FilamentWebhookServer\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
@@ -26,15 +28,16 @@ class WebhookController extends BaseController
 
         try {
             $webhook = FilamentWebhookServer::create($request->all());
-            return response()->json([
+
+            return new JsonResponse([
                 'message' => 'Webhook created!',
                 'webhook_id' => $webhook->id,
             ], ResponseAlias::HTTP_CREATED);
-        } catch (\Throwable $th) {
-            return response()->json([
+        } catch (Throwable $th) {
+            return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage()
-                ]
+                    'message' => $th->getMessage(),
+                ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -42,15 +45,12 @@ class WebhookController extends BaseController
     public function get()
     {
         try {
-            return response()->json(
-                FilamentWebhookServer::all(),
-                ResponseAlias::HTTP_OK
-            );
-        } catch (\Throwable $th) {
-            return response()->json([
+            return new JsonResponse(FilamentWebhookServer::all(), ResponseAlias::HTTP_OK);
+        } catch (Throwable $th) {
+            return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage()
-                ]
+                    'message' => $th->getMessage(),
+                ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -74,12 +74,12 @@ class WebhookController extends BaseController
             $webhook = FilamentWebhookServer::findOrFail($id);
             $webhook->update($request->all());
 
-            return response()->json(['message' => 'Webhook updated!'],ResponseAlias::HTTP_OK);
-        } catch (\Throwable $th) {
-            return response()->json([
+            return new JsonResponse(['message' => 'Webhook updated!'], ResponseAlias::HTTP_OK);
+        } catch (Throwable $th) {
+            return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage()
-                ]
+                    'message' => $th->getMessage(),
+                ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -90,14 +90,13 @@ class WebhookController extends BaseController
             $webhook = FilamentWebhookServer::findOrFail($id);
             $webhook->delete();
 
-            return response()->json(['message' => 'Webhook deleted!'], ResponseAlias::HTTP_OK);
-        } catch (\Throwable $th) {
-            return response()->json([
+            return new JsonResponse(['message' => 'Webhook deleted!'], ResponseAlias::HTTP_OK);
+        } catch (Throwable $th) {
+            return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage()
-                ]
+                    'message' => $th->getMessage(),
+                ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
-

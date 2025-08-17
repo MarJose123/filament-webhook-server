@@ -2,6 +2,7 @@
 
 namespace Marjose123\FilamentWebhookServer\Concern;
 
+use Closure;
 use Filament\Support\Concerns\EvaluatesClosures;
 
 trait HasState
@@ -10,7 +11,7 @@ trait HasState
 
     protected bool $enabled = true;
 
-    public function enablePlugin(\Closure|bool $enable = true): static
+    public function enablePlugin(Closure|bool $enable = true): static
     {
         $this->enabled = (bool) $this->evaluate($enable);
 

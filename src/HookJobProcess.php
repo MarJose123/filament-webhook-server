@@ -19,7 +19,7 @@ class HookJobProcess
 
     private ?string $module;
 
-    public function __construct(Collection $search, Model $model, $event, $module)
+    public function __construct(Collection $search, Model $model, ?string $event, ?string $module)
     {
         $this->model = $model;
         $this->search = $search;
@@ -38,7 +38,7 @@ class HookJobProcess
                 ->useHttpVerb($webhookClient->method)
                 ->verifySsl($webhookClient->verifySsl)
                 ->withHeaders($webhookClient->header)
-                ->payload([$this->payload($this->model, $this->event, $this->module,$webhookClient->data_option)])
+                ->payload([$this->payload($this->model, $this->event, $this->module, $webhookClient->data_option)])
                 ->dispatchSync();
         }
     }

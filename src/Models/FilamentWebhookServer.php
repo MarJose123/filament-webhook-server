@@ -19,14 +19,16 @@ class FilamentWebhookServer extends Model
         'events',
     ];
 
-    protected $casts = [
-        'header' => 'array',
-        'events' => 'array',
-        'verifySsl' => 'boolean',
-    ];
-
     public function transactionlogs()
     {
         return $this->hasMany(FilamentWebhookServerHistory::class, 'webhook_client', 'id');
+    }
+    protected function casts(): array
+    {
+        return [
+            'header' => 'array',
+            'events' => 'array',
+            'verifySsl' => 'boolean',
+        ];
     }
 }

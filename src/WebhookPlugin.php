@@ -5,7 +5,7 @@ namespace Marjose123\FilamentWebhookServer;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Marjose123\FilamentWebhookServer\Concern\CanCustomizePage;
-use Marjose123\FilamentWebhookServer\Concern\HasHistory;
+use Marjose123\FilamentWebhookServer\Concern\HasLogs;
 use Marjose123\FilamentWebhookServer\Concern\HasModels;
 use Marjose123\FilamentWebhookServer\Concern\HasNavigation;
 use Marjose123\FilamentWebhookServer\Concern\HasPolling;
@@ -14,7 +14,7 @@ use Marjose123\FilamentWebhookServer\Concern\HasState;
 class WebhookPlugin implements Plugin
 {
     use CanCustomizePage;
-    use HasHistory;
+    use HasLogs;
     use HasModels;
     use HasNavigation;
     use HasPolling;

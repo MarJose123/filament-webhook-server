@@ -27,5 +27,5 @@ return [
     'navigation' => [
         'icon' => 'heroicon-s-arrow-up-on-square-stack',
         'sort' => 0,
-    ]
+    ],
 ];

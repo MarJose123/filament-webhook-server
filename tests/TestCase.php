@@ -15,7 +15,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Marjose123\\FilamentWebhookServer\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName): string => 'Marjose123\\FilamentWebhookServer\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

@@ -2,45 +2,43 @@
 
 namespace Marjose123\FilamentWebhookServer\Pages;
 
+use Filament\Actions\Action;
 use Filament\Pages\Page;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
+use Marjose123\FilamentWebhookServer\WebhookPlugin;
 
 class WebhookHistory extends Page implements HasTable
 {
     use InteractsWithTable;
 
-    /**
-     * @return string|null
-     */
     public static function getCluster(): ?string
     {
-        return config('filament-webhook-server.cluster');
+        return filament()->isServing() && WebhookPlugin::get()->getCluster();
     }
 
-    protected static string $view = 'filament-webhook-server::pages.webhook-histories';
+    protected string $view = 'filament-webhook-server::pages.webhook-histories';
 
     protected static ?string $title = 'Webhook Transaction Logs';
 
     protected static bool $shouldRegisterNavigation = false;
 
-    public string|null $webhookClient_Id;
+    public ?string $webhookClient_Id;
 
     public function getHeading(): string
     {
         return __('filament-webhook-server::default.pages.history.heading');
     }
 
-    public function mount()
+    public function mount(): void
     {
-        if (config('filament-webhook-server.webhook.keep_history')) {
+        if (filament()->isServing() && WebhookPlugin::get()->canKeepLogs()) {
             $this->webhookClient_Id = request('client_id');
         } else {
-            $this->redirect(url()->previous());
+            redirect()->intended(url()->previous());
         }
     }
 
@@ -51,12 +49,17 @@ class WebhookHistory extends Page implements HasTable
 
     protected function getTableColumns(): array
     {
-        return  [
-            TextColumn::make('uuid'),
-            TextColumn::make('status_code'),
-            TextColumn::make('errorMessage'),
-            TextColumn::make('errorType'),
-            TextColumn::make('attempt'),
+        return [
+            TextColumn::make('uuid')
+                ->label('ID'),
+            TextColumn::make('status_code')
+                ->label('Status Code'),
+            TextColumn::make('errorMessage')
+                ->label('Error Message'),
+            TextColumn::make('errorType')
+                ->label('Error Type'),
+            TextColumn::make('attempt')
+                ->label('Attempt'),
         ];
     }
 
@@ -71,7 +74,7 @@ class WebhookHistory extends Page implements HasTable
     protected function getActions(): array
     {
         return [
-            \Filament\Pages\Actions\Action::make('Go Back')
+            Action::make('Go Back')
                 ->button()
                 ->icon('heroicon-o-arrow-left-circle')
                 ->label(
@@ -95,6 +98,6 @@ class WebhookHistory extends Page implements HasTable
 
     protected function getTablePollingInterval(): ?string
     {
-        return config('filament-webhook-server.polling', '10s');
+        return filament()->isServing() && WebhookPlugin::get()->isPolling() ? WebhookPlugin::get()->getPollingInterval() : null;
     }
 }

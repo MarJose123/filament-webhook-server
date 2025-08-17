@@ -7,7 +7,10 @@ use Marjose123\FilamentWebhookServer\ApiResponseBuilder;
 
 trait helper
 {
-    public function getAllModelNames()
+    /**
+     * @return mixed[][]|string[]
+     */
+    public function getAllModelNames(): array
     {
         $models = [];
         $model_list = config('filament-webhook-server.models');
@@ -22,10 +25,10 @@ trait helper
     public function payload(Model $model, $event, $module, $dataOption = 'summary'): object|array
     {
         return ApiResponseBuilder::create()
-                                 ->setModel($model)
-                                 ->setDataOption($dataOption)
-                                 ->setEvent($event)
-                                 ->setModule($module)
-                                 ->generate();
+            ->setModel($model)
+            ->setDataOption($dataOption)
+            ->setEvent($event)
+            ->setModule($module)
+            ->generate();
     }
 }
