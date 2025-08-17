@@ -24,7 +24,6 @@
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.0",
-        "laravel/pint": "^1.4",
         "nunomaduro/collision": "^8.1",
         "orchestra/testbench": "^9.0|^10.0",
         "pestphp/pest": "^3.7",
@@ -48,13 +47,8 @@
     },
     "scripts": {
         "test:pest": "vendor/bin/pest --parallel",
-        "format": "./vendor/bin/pint",
         "rector": "vendor/bin/rector process --ansi",
         "rector:check": "vendor/bin/rector process --dry-run --ansi",
-        "test": [
-            "@test:pest",
-            "@test:phpstan"
-        ]
     },
     "config": {
         "sort-packages": true,
