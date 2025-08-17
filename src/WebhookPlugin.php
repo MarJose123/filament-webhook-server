@@ -4,20 +4,25 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Marjose123\FilamentWebhookServer\Pages\WebhookHistory;
-use Marjose123\FilamentWebhookServer\Pages\Webhooks;
+use Marjose123\FilamentWebhookServer\Concern\CanCustomizePage;
+use Marjose123\FilamentWebhookServer\Concern\HasHistory;
+use Marjose123\FilamentWebhookServer\Concern\HasModels;
+use Marjose123\FilamentWebhookServer\Concern\HasNavigation;
+use Marjose123\FilamentWebhookServer\Concern\HasPolling;
+use Marjose123\FilamentWebhookServer\Concern\HasState;
 
 class WebhookPlugin implements Plugin
 {
+    use CanCustomizePage;
+    use HasHistory;
+    use HasModels;
+    use HasNavigation;
+    use HasPolling;
+    use HasState;
 
     public function getId(): string
     {
         return 'filament-webhook-server';
-    }
-
-    public function register(Panel $panel): void
-    {
-        $panel->pages(config('filament-webhook-server.pages'));
     }
 
     public static function make(): static
@@ -33,8 +38,12 @@ class WebhookPlugin implements Plugin
         return $plugin;
     }
 
-    public function boot(Panel $panel): void
+    public function register(Panel $panel): void
     {
-        // TODO: Implement boot() method.
+        if ($this->isEnabled()) {
+            $panel->pages($this->getCustomPages());
+        }
     }
+
+    public function boot(Panel $panel): void {}
 }
