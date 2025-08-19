@@ -3,6 +3,7 @@
 namespace Marjose123\FilamentWebhookServer\Concern;
 
 use Illuminate\Support\Arr;
+use Marjose123\FilamentWebhookServer\ModelDiscovery;
 
 trait HasModels
 {
@@ -10,7 +11,7 @@ trait HasModels
 
     protected array $excludedModels = [];
 
-    public function models(array $models): static
+    public function includeModels(array $models): static
     {
         $this->models = $models;
 
@@ -26,7 +27,11 @@ trait HasModels
 
     public function getModels(): array
     {
-        return Arr::except($this->models, $this->getExcludedModels());
+       $discovery = ModelDiscovery::getAllModels();
+
+       $models = array_merge($this->models, $discovery);
+
+       return Arr::except($models, $this->getExcludedModels());
     }
 
     public function getExcludedModels(): array
