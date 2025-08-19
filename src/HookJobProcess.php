@@ -4,12 +4,13 @@ namespace Marjose123\FilamentWebhookServer;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Marjose123\FilamentWebhookServer\Concern\HasPayload;
 use Marjose123\FilamentWebhookServer\Traits\helper;
 use Spatie\WebhookServer\WebhookCall;
 
 class HookJobProcess
 {
-    use helper;
+    use HasPayload;
 
     private ?Collection $search;
 
