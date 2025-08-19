@@ -104,19 +104,23 @@ class Webhooks extends Page implements HasSchemas, HasTable
 
     public function create(): void
     {
-        $data = $this->form->getState();
-        $webhookModel = new FilamentWebhookServer;
-        $webhookModel->name = $data['name'];
-        $webhookModel->description = $data['description'];
-        $webhookModel->url = $data['url'];
-        $webhookModel->method = $data['method'];
-        $webhookModel->model = ucfirst($data['model']);
-        $webhookModel->header = $data['header'];
-        $webhookModel->data_option = $data['data_option'];
-        $webhookModel->events = $data['events'];
-        $webhookModel->verifySsl = $data['verifySsl'];
-        $webhookModel->save();
+
+       $this->form->getState();
+
+        FilamentWebhookServer::create([
+            'name' => $this->data['name'],
+            'description' => $this->data['description'],
+            'url' => $this->data['url'],
+            'method' => $this->data['method'],
+            'model' => ucfirst($this->data['model']),
+            'header' => $this->data['header'],
+            'data_option' => $this->data['data_option'],
+            'events' => $this->data['events'],
+            'verifySsl' => $this->data['verifySsl'],
+        ]);
+
         $this->dispatch('close-modal', id: 'create-webhook');
+
         Notification::make()
             ->success()
             ->body(__('filament-webhook-server::default.notification.create.success'))
