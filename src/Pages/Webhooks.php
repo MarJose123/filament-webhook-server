@@ -34,7 +34,6 @@ use Marjose123\FilamentWebhookServer\WebhookPlugin;
 
 class Webhooks extends Page implements HasSchemas, HasTable
 {
-    use helper;
     use InteractsWithTable;
 
     protected string $view = 'filament-webhook-server::pages.webhooks';
@@ -152,7 +151,9 @@ class Webhooks extends Page implements HasSchemas, HasTable
                         ->columns()
                         ->required(),
                     Select::make('model')
-                        ->options($this->getAllModelNames())
+                        ->native(false)
+                        ->searchable()
+                        ->options(filament()->isServing() ? WebhookPlugin::get()->getModels() : [])
                         ->required(),
                     KeyValue::make('header'),
                     Radio::make('data_option')
