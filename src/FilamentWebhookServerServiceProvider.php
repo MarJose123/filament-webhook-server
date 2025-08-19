@@ -14,7 +14,6 @@ class FilamentWebhookServerServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package->name(static::$name)
-            ->hasConfigFile()
             ->hasTranslations()
             ->hasMigrations(['create_filament-webhook-server_table', 'create_filament_webhook_server_histories_table'])
             ->hasViews();
