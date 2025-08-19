@@ -176,7 +176,8 @@ class Webhooks extends Page implements HasSchemas, HasTable
                             'forceDeleted' => 'Force Deleted',
                         ])
                         ->columns(2),
-                    Radio::make('verifySsl')->label('Verify SSL?')
+                    Radio::make('verifySsl')
+                        ->label('Verify SSL?')
                         ->boolean()
                         ->inline()
                         ->required(),
@@ -246,11 +247,6 @@ class Webhooks extends Page implements HasSchemas, HasTable
     protected function getTableActions(): array
     {
         return [
-            Action::make('View Logs')
-                ->visible(fn (): bool => filament()->isServing() && WebhookPlugin::get()->canKeepLogs())
-                ->icon('heroicon-o-document-text')
-                ->color('success')
-                ->url(fn (FilamentWebhookServer $record): string => WebhookHistory::getUrl(['client_id' => $record->id])),
             ViewAction::make('view')
                 ->modalHeading('View Webhook')
                 ->schema(fn(Schema $schema): Schema => $this->form($schema))
@@ -267,6 +263,11 @@ class Webhooks extends Page implements HasSchemas, HasTable
                 ]))
                 ->modalFooterActionsAlignment(Alignment::End)
             ->modalWidth(Width::Medium),
+            Action::make('Logs')
+                ->visible(fn (): bool => filament()->isServing() && WebhookPlugin::get()->canKeepLogs())
+                ->icon('heroicon-o-document-text')
+                ->color('success')
+                ->url(fn (FilamentWebhookServer $record): string => WebhookHistory::getUrl(['client_id' => $record->id])),
             DeleteAction::make('delete')
                 ->requiresConfirmation(),
         ];
@@ -281,12 +282,14 @@ class Webhooks extends Page implements HasSchemas, HasTable
     {
         return [
             TextColumn::make('name'),
-            TextColumn::make('description'),
+            TextColumn::make('description')
+                ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('model')
                 ->label('Module'),
-            TextColumn::make('url'),
-            IconColumn::make('verifySsl')
-                ->boolean(),
+            TextColumn::make('url')
+                ->toggleable(isToggledHiddenByDefault: true),
+            TextColumn::make('verifySsl')
+                ->formatStateUsing(fn ($state): string => $state ? 'Yes' : 'No'),
             TextColumn::make('events')
                 ->badge()
                 ->separator()
