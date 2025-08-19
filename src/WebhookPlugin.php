@@ -2,6 +2,7 @@
 
 namespace Marjose123\FilamentWebhookServer;
 
+use Exception;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Marjose123\FilamentWebhookServer\Concern\CanCustomizePage;
@@ -10,6 +11,7 @@ use Marjose123\FilamentWebhookServer\Concern\HasModels;
 use Marjose123\FilamentWebhookServer\Concern\HasNavigation;
 use Marjose123\FilamentWebhookServer\Concern\HasPolling;
 use Marjose123\FilamentWebhookServer\Concern\HasState;
+use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 
 class WebhookPlugin implements Plugin
 {
@@ -45,5 +47,21 @@ class WebhookPlugin implements Plugin
         }
     }
 
-    public function boot(Panel $panel): void {}
+    public function boot(Panel $panel): void
+    {
+        if($this->isEnabled()) {
+            $models = $this->getModels();
+            foreach ($models as $model) {
+                if (class_exists($model)) {
+                    try {
+                        $model::observe(ModelObserver::class);
+                    } catch (Exception $e) {
+                        logger()->warning("Failed to register observer for model: $model", [
+                            'error' => $e->getMessage()
+                        ]);
+                    }
+                }
+            }
+        }
+    }
 }
