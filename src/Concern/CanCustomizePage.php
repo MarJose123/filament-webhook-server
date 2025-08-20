@@ -13,7 +13,7 @@ trait CanCustomizePage
 
     protected ?string $cluster = null;
 
-    public function customPageUsing(string $webhookPage, string $webhookHistoryPage): static
+    public function customPageUsing(string $webhookPage = Webhooks::class, string $webhookHistoryPage = WebhookHistory::class): static
     {
         $this->webhookPage = $webhookPage;
         $this->webhookHistoryPage = $webhookHistoryPage;
