@@ -22,7 +22,7 @@ class WebhookHistory extends Page implements HasTable
 
     protected string $view = 'filament-webhook-server::pages.webhook-histories';
 
-    protected static ?string $title = 'Webhook Transaction Logs';
+    protected static ?string $title = 'Webhook Logs';
 
     protected static bool $shouldRegisterNavigation = false;
 
