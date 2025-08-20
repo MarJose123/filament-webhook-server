@@ -67,8 +67,6 @@ class WebhookHistory extends Page implements HasTable
     protected function getTableActions(): array
     {
         return [
-            Action::make('Go Back')
-                ->url(Webhooks::getUrl()),
         ];
     }
 
