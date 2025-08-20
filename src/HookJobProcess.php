@@ -11,9 +11,7 @@ class HookJobProcess
 {
     use HasPayload;
 
-    public function __construct(private ?Collection $search, private ?Model $model, private ?string $event, private ?string $module)
-    {
-    }
+    public function __construct(private ?Collection $search, private ?Model $model, private ?string $event, private ?string $module) {}
 
     public function send(): void
     {
