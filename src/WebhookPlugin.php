@@ -44,6 +44,8 @@ class WebhookPlugin implements Plugin
     {
         if ($this->isEnabled()) {
             $panel->pages($this->getCustomPages());
+
+            app()->register(EventServiceProvider::class);
         }
     }
 

@@ -19,12 +19,4 @@ class FilamentWebhookServerServiceProvider extends PackageServiceProvider
             ->hasViews();
     }
 
-    /**
-     * @throws InvalidPackage
-     */
-    public function register(): void
-    {
-        parent::register();
-        $this->app->register(EventServiceProvider::class);
-    }
 }
