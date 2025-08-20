@@ -19,7 +19,7 @@ class ModelObserver
         $search = FilamentWebhookServer::query()->whereJsonContains('events', ['created'])
             ->where(function (Builder $query) use ($module, $model): void {
                 $query->where('model', '=', $module);
-                $query->orWhere('model', '=', $model);
+                $query->orWhere('model', '=', class_basename($model));
             })->get();
         /*
          * Send to Job Process
@@ -36,7 +36,7 @@ class ModelObserver
         $search = FilamentWebhookServer::query()->whereJsonContains('events', ['updated'])
             ->where(function (Builder $query) use ($module, $model): void {
                 $query->where('model', '=', $module);
-                $query->orWhere('model', '=', $model);
+                $query->orWhere('model', '=', class_basename($model));
             })->get();
         /*
          * Send to Job Process
@@ -53,7 +53,7 @@ class ModelObserver
         $search = FilamentWebhookServer::query()->whereJsonContains('events', ['deleted'])
             ->where(function (Builder $query) use ($module, $model): void {
                 $query->where('model', '=', $module);
-                $query->orWhere('model', '=', $model);
+                $query->orWhere('model', '=', class_basename($model));
             })->get();
         /*
          * Send to Job Process
@@ -70,7 +70,7 @@ class ModelObserver
         $search = FilamentWebhookServer::query()->whereJsonContains('events', ['restored'])
             ->where(function (Builder $query) use ($module, $model): void {
                 $query->where('model', '=', $module);
-                $query->orWhere('model', '=', $model);
+                $query->orWhere('model', '=', class_basename($model));
             })->get();
         /*
          * Send to Job Process
