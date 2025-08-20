@@ -2,6 +2,15 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 3.0 - 2025-08-20
+
+### What's Changed
+
+* Filament v4 support
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/44
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/2.2.0...3.0
+
 ## 2.2.0 - 2025-03-24
 
 ### What's Changed
@@ -190,6 +199,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -210,9 +220,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
