@@ -6,9 +6,9 @@ trait HasPolling
 {
     protected bool $polling = false;
 
-    protected int $pollingInterval = 10;
+    protected int $pollingInterval;
 
-    public function polling(int $seconds): static
+    public function polling(int $seconds = 10): static
     {
         $this->polling = true;
         $this->pollingInterval = $seconds;
