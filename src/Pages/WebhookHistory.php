@@ -26,7 +26,7 @@ class WebhookHistory extends Page implements HasTable
 
     protected static bool $shouldRegisterNavigation = false;
 
-    public ?string $webhookClient_Id;
+    public ?string $webhookClient_Id = null;
 
     public function getHeading(): string
     {

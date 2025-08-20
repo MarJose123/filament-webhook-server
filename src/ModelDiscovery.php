@@ -101,7 +101,7 @@ class ModelDiscovery
 
             return ! $reflection->isAbstract()
                 && $reflection->isSubclassOf(Model::class);
-        } catch (Exception $exception) {
+        } catch (Exception) {
             return false;
         }
     }

@@ -9,11 +9,11 @@ class ApiResponseBuilder
 {
     private Model $model;
 
-    private ?string $dataOption;
+    private ?string $dataOption = null;
 
-    private ?string $event;
+    private ?string $event = null;
 
-    private ?string $module;
+    private ?string $module = null;
 
     public static function create(): ApiResponseBuilder
     {

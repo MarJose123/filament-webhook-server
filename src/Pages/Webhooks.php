@@ -109,7 +109,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
             'description' => $this->data['description'],
             'url' => $this->data['url'],
             'method' => $this->data['method'],
-            'model' => ucfirst($this->data['model']),
+            'model' => ucfirst((string) $this->data['model']),
             'header' => $this->data['header'],
             'data_option' => $this->data['data_option'],
             'events' => $this->data['events'],

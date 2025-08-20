@@ -11,20 +11,8 @@ class HookJobProcess
 {
     use HasPayload;
 
-    private ?Collection $search;
-
-    private ?Model $model;
-
-    private ?string $event;
-
-    private ?string $module;
-
-    public function __construct(Collection $search, Model $model, string $event, string $module)
+    public function __construct(private ?Collection $search, private ?Model $model, private ?string $event, private ?string $module)
     {
-        $this->model = $model;
-        $this->search = $search;
-        $this->event = $event;
-        $this->module = $module;
     }
 
     public function send(): void
