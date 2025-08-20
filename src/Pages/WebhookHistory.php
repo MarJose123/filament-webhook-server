@@ -55,6 +55,7 @@ class WebhookHistory extends Page implements HasTable
             TextColumn::make('status_code')
                 ->label('Status Code'),
             TextColumn::make('errorMessage')
+                ->wrap()
                 ->label('Error Message'),
             TextColumn::make('errorType')
                 ->label('Error Type'),
