@@ -20,7 +20,13 @@ class HookJobProcess
 
     private ?string $module;
 
-    public function __construct(Collection $search, Model $model, ?string $event, ?string $module)
+    /**
+     * @param Collection $search
+     * @param Model $model
+     * @param string $event
+     * @param string $module
+     */
+    public function __construct(Collection $search, Model $model, string $event, string $module)
     {
         $this->model = $model;
         $this->search = $search;

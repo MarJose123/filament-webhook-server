@@ -58,7 +58,10 @@ class ApiResponseBuilder
         return $this;
     }
 
-    public function generate()
+    /**
+     * @return object
+     */
+    public function generate(): object
     {
         $payload = match ($this->dataOption) {
             'summary' => [
@@ -71,13 +74,12 @@ class ApiResponseBuilder
                 ? (object) $this->model->toWebhookPayload() : [],
             default => [],
         };
-        $apiReponse = [
+
+        return (object) [
             'event' => $this->event ?? null,
             'module' => $this->module,
             'triggered_at' => Carbon::now()->timezone(config('app.timezone')),
             'data' => $payload,
         ];
-
-        return (object) $apiReponse;
     }
 }

@@ -2,80 +2,98 @@
 
 namespace Marjose123\FilamentWebhookServer\Observers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Marjose123\FilamentWebhookServer\HookJobProcess;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use ReflectionClass as RC;
+use ReflectionException;
 use Spatie\ModelInfo\ModelInfo;
 
 class ModelObserver
 {
-    public function created(Model $model)
+    /**
+     * @param Model $model
+     * @return void
+     */
+    public function created(Model $model): void
     {
         $module = ucfirst((new RC($model))->getShortName());
         /*
          * Search on the DB that want to receive webhook from this model
          */
-        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['created'])->where('model', '=', $module)->get();
+        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['created'])
+            ->where(function (Builder $query) use ($module, $model): void {
+                $query->where('model', '=', $module);
+                $query->orWhere('model', '=', $model);
+            })->get();
         /*
          * Send to Job Process
          */
         (new HookJobProcess($search, $model, 'created', $module))->send();
     }
 
-    public function updated(Model $model)
+    /**
+     * @param Model $model
+     * @return void
+     */
+    public function updated(Model $model): void
     {
-        $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
+        $module = ucfirst((new RC($model))->getShortName());
         /*
          * Search on the DB that want to receive webhook from this model
          */
-        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['updated'])->where('model', '=', $module)->get();
+        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['updated'])
+            ->where(function (Builder $query) use ($module, $model): void {
+                $query->where('model', '=', $module);
+                $query->orWhere('model', '=', $model);
+            })->get();
         /*
          * Send to Job Process
          */
         (new HookJobProcess($search, $model, 'updated', $module))->send();
     }
 
-    public function deleted(Model $model)
+    /**
+     * @param Model $model
+     * @return void
+     */
+    public function deleted(Model $model): void
     {
-        $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
+        $module = ucfirst((new RC($model))->getShortName());
         /*
          * Search on the DB that want to receive webhook from this model
          */
-        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['deleted'])->where('model', '=', $module)->get();
+        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['deleted'])
+            ->where(function (Builder $query) use ($module, $model): void {
+                $query->where('model', '=', $module);
+                $query->orWhere('model', '=', $model);
+            })->get();
         /*
          * Send to Job Process
          */
         (new HookJobProcess($search, $model, 'deleted', $module))->send();
     }
 
-    public function restored(Model $model)
+    /**
+     * @param Model $model
+     * @return void
+     */
+    public function restored(Model $model): void
     {
-        $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
+        $module = ucfirst((new RC($model))->getShortName());
         /*
          * Search on the DB that want to receive webhook from this model
          */
-        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['restored'])->where('model', '=', $module)->get();
+        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['restored'])
+            ->where(function (Builder $query) use ($module, $model): void {
+                $query->where('model', '=', $module);
+                $query->orWhere('model', '=', $model);
+            })->get();
         /*
          * Send to Job Process
          */
         (new HookJobProcess($search, $model, 'restored', $module))->send();
     }
 
-    public function forceDeleted(Model $model)
-    {
-        $modelInfo = ModelInfo::forModel($model::class);
-        $module = ucfirst(str_replace("App\Models\\", '', $modelInfo->class));
-        /*
-         * Search on the DB that want to receive webhook from this model
-         */
-        $search = FilamentWebhookServer::query()->whereJsonContains('events', ['forceDeleted'])->where('model', '=', $module)->get();
-        /*
-         * Send to Job Process
-         */
-        (new HookJobProcess($search, $model, 'forceDeleted', $module))->send();
-    }
 }
