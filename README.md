@@ -3,19 +3,19 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/marjose123/filament-webhook-server.svg?style=flat-square)](https://packagist.org/packages/marjose123/filament-webhook-server)
 [![Total Downloads](https://img.shields.io/packagist/dt/marjose123/filament-webhook-server.svg?style=flat-square)](https://packagist.org/packages/marjose123/filament-webhook-server)
 
-![image1](https://github.com/MarJose123/filament-webhook-server/blob/2.x/.art/filament-webhook-server1.png)
+## Screenshots
+![image1](.art/filament-webhook-server2.png)
+![image2](.art/filament-webhook-server1.png)
 
-This package provides a Filament page that you can send webhook server . You'll find installation instructions and full documentation on [spatie/laravel-webhook-server](https://github.com/spatie/laravel-webhook-server).
+This package provides a Filament page that you can send webhook server. You'll find installation instructions and full documentation on [spatie/laravel-webhook-server](https://github.com/spatie/laravel-webhook-server).
 
----
-:rotating_light: _For latest version that support FilamentPhp v2.x use this branch [1.x](https://github.com/MarJose123/filament-webhook-server/tree/1.x)_or released version "^1.0"
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require marjose123/filament-webhook-server:"^2.0"
+composer require marjose123/filament-webhook-server
 ```
 
 You can publish and run the migrations with:
@@ -23,29 +23,6 @@ You can publish and run the migrations with:
 ```bash
 php artisan vendor:publish --tag="filament-webhook-server-migrations"
 php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-webhook-server-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-    /*
-     *  Models that you want to be part of the webhooks options
-     */
-    'models' => [
-        \App\Models\User::class,
-    ],
-    /*
-     */
-    'polling' => '10s'
-];
-
 ```
 
 Add the plugin to your panel and you're ready to go
@@ -65,21 +42,17 @@ public function panel(Panel $panel): Panel
 
 ```
 
-
 ## Usage
-> 1. Add the models that you want to be part of the webhook
+> 1. All the models will automatically be part of the webhook as an option during creation.
 > 2. This package will automatically register the `Webhook-Server`. You'll be able to see it when you visit your Filament admin panel.
 
-## Customising the polling interval
-
-You can customise the polling interval for the `Webhook-Server` by publishing the configuration file and updating the `polling` value.
 
 ## Webhook payload Structure
-```
+```json
 [
   {
     "event": "created",  // <== Type of Event
-    "module": "Testing", // <== Module that were the event happend
+    "module": "Testing", // <== Module name, were the event happend
     "triggered_at": "2023-01-18T05:07:37.748031Z", // <== Based on the Date and time the Event happen
     "data": { // <== Actual information depending on what you selected "Summary, All or Custom"
       "id": 34,
@@ -88,21 +61,20 @@ You can customise the polling interval for the `Webhook-Server` by publishing th
   }
 ]
 ```
-for custom option you need to create toWebhookPayload method in your models
+For a custom option you need to implement `Webhookable` interface and create your `toWebhookPayload` method in your models
 
-```
-public function toWebhookPayload()
+```php
+class YourModel extends Model implements Webhookable
 {
+ //......
+ 
+ public function toWebhookPayload(): array
+ {
     return [
         'customAttribute' => $this->yourAttribute
     ];
+ }
 }
-```
-
-## Testing
-
-```bash
-composer test
 ```
 
 ## Changelog
@@ -119,9 +91,9 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Marjose](https://github.com/MarJose123)
+- [Marjose123](https://github.com/MarJose123)
 - [All Contributors](../../contributors)
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see the [License File](LICENSE.md) for more information.
