@@ -304,7 +304,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
 
     protected function getTableEmptyStateIcon(): string
     {
-        return filament()->isServing() && WebhookPlugin::get()->getIcon() ? WebhookPlugin::get()->getIcon() : 'heroicon-o-bolt';
+        return 'heroicon-o-bolt';
     }
 
     protected function getTableEmptyStateHeading(): ?string
