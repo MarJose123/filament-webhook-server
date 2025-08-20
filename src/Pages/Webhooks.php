@@ -151,7 +151,20 @@ class Webhooks extends Page implements HasSchemas, HasTable
                     Select::make('model')
                         ->native(false)
                         ->searchable()
-                        ->options(filament()->isServing() ? WebhookPlugin::get()->getModels() : [])
+                        ->options(function () {
+                            if (filament()->isServing()) {
+                                $models = collect(WebhookPlugin::get()->getModels());
+
+                                return $models
+                                    ->unique()
+                                    ->mapWithKeys(fn ($modelClass) => [
+                                        class_basename($modelClass) => $modelClass,
+                                    ])
+                                    ->toArray();
+                            }
+
+                            return [];
+                        })
                         ->required(),
                     KeyValue::make('header'),
                     Radio::make('data_option')
