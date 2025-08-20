@@ -5,7 +5,6 @@ namespace Marjose123\FilamentWebhookServer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Marjose123\FilamentWebhookServer\Concern\HasPayload;
-use Marjose123\FilamentWebhookServer\Traits\helper;
 use Spatie\WebhookServer\WebhookCall;
 
 class HookJobProcess
@@ -20,12 +19,6 @@ class HookJobProcess
 
     private ?string $module;
 
-    /**
-     * @param Collection $search
-     * @param Model $model
-     * @param string $event
-     * @param string $module
-     */
     public function __construct(Collection $search, Model $model, string $event, string $module)
     {
         $this->model = $model;

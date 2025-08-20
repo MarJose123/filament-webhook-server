@@ -21,8 +21,8 @@ class WebhookPlugin implements Plugin
     use HasModels;
     use HasNavigation;
     use HasPolling;
-    use HasState;
     use HasRoutes;
+    use HasState;
 
     public function getId(): string
     {
@@ -53,15 +53,15 @@ class WebhookPlugin implements Plugin
 
     public function boot(Panel $panel): void
     {
-        if($this->isEnabled()) {
+        if ($this->isEnabled()) {
             $models = $this->getModels();
             foreach ($models as $model) {
                 if (class_exists($model)) {
                     try {
                         $model::observe(ModelObserver::class);
                     } catch (Exception $e) {
-                        logger()->warning("Failed to register observer for model: $model", [
-                            'error' => $e->getMessage()
+                        logger()->warning('Failed to register observer for model: '.$model, [
+                            'error' => $e->getMessage(),
                         ]);
                     }
                 }

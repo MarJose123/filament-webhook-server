@@ -28,7 +28,8 @@
         "pestphp/pest": "^3.7",
         "pestphp/pest-plugin-laravel": "^3.1",
         "phpunit/phpunit": "^11.0|^12.0",
-        "rector/rector": "^2.1"
+        "rector/rector": "^2.1",
+        "laravel/pint": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -43,6 +44,7 @@
     },
     "scripts": {
         "test:pest": "vendor/bin/pest --parallel",
+        "format": "vendor/bin/pint --ansi",
         "rector": "vendor/bin/rector process --ansi",
         "rector:check": "vendor/bin/rector process --dry-run --ansi"
     },

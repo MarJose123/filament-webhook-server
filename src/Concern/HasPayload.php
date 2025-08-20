@@ -7,13 +7,6 @@ use Marjose123\FilamentWebhookServer\ApiResponseBuilder;
 
 trait HasPayload
 {
-    /**
-     * @param Model $model
-     * @param string $event
-     * @param string $module
-     * @param string $dataOption
-     * @return object
-     */
     public function payload(Model $model, string $event, string $module, string $dataOption = 'summary'): object
     {
         return ApiResponseBuilder::create()
@@ -23,5 +16,4 @@ trait HasPayload
             ->setModule($module)
             ->generate();
     }
-
 }

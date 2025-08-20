@@ -21,7 +21,6 @@ use Filament\Schemas\Schema;
 use Filament\Support\Enums\Alignment;
 use Filament\Support\Enums\Width;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -29,7 +28,6 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
-use Marjose123\FilamentWebhookServer\Traits\helper;
 use Marjose123\FilamentWebhookServer\WebhookPlugin;
 
 class Webhooks extends Page implements HasSchemas, HasTable
@@ -104,7 +102,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
     public function create(): void
     {
 
-       $this->form->getState();
+        $this->form->getState();
 
         FilamentWebhookServer::create([
             'name' => $this->data['name'],
@@ -164,7 +162,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
                         ])->descriptions([
                             'all' => 'All Data of the event triggered',
                             'summary' => 'Push only the ID if the record that trigger an event and its timestamp',
-                            'custom' => 'Only data defined on model\'s toWebhookPayload method',
+                            'custom' => "Only data defined on model's toWebhookPayload method",
                         ])
                         ->columns(2)
                         ->required(),
@@ -250,7 +248,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
         return [
             ViewAction::make('view')
                 ->modalHeading('View Webhook')
-                ->schema(fn(Schema $schema): Schema => $this->form($schema))
+                ->schema(fn (Schema $schema): Schema => $this->form($schema))
                 ->mountUsing(fn (Schema $form, FilamentWebhookServer $record): Schema => $form->fill([
                     'name' => $record->name,
                     'description' => $record->description,
@@ -263,7 +261,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
                     'events' => $record->events,
                 ]))
                 ->modalFooterActionsAlignment(Alignment::End)
-            ->modalWidth(Width::Medium),
+                ->modalWidth(Width::Medium),
             Action::make('Logs')
                 ->visible(fn (): bool => filament()->isServing() && WebhookPlugin::get()->canKeepLogs())
                 ->icon('heroicon-o-document-text')

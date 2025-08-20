@@ -39,7 +39,7 @@ class ModelDiscovery
      */
     private static function getModelsFromPath(string $path): array
     {
-        if (!is_dir($path)) {
+        if (! is_dir($path)) {
             return [];
         }
 
@@ -81,7 +81,7 @@ class ModelDiscovery
         }
 
         if ($namespace && $className) {
-            return $namespace . '\\' . $className;
+            return $namespace.'\\'.$className;
         }
 
         return null;
@@ -93,17 +93,16 @@ class ModelDiscovery
     private static function isEloquentModel(string $className): bool
     {
         try {
-            if (!class_exists($className)) {
+            if (! class_exists($className)) {
                 return false;
             }
 
             $reflection = new ReflectionClass($className);
 
-            return !$reflection->isAbstract()
+            return ! $reflection->isAbstract()
                 && $reflection->isSubclassOf(Model::class);
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             return false;
         }
     }
-
 }

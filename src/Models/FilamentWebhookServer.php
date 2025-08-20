@@ -23,6 +23,7 @@ class FilamentWebhookServer extends Model
     {
         return $this->hasMany(FilamentWebhookServerHistory::class, 'webhook_client', 'id');
     }
+
     protected function casts(): array
     {
         return [

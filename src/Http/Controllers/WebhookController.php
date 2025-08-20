@@ -3,11 +3,11 @@
 namespace Marjose123\FilamentWebhookServer\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Throwable;
 
 class WebhookController extends BaseController
 {
@@ -33,10 +33,10 @@ class WebhookController extends BaseController
                 'message' => 'Webhook created!',
                 'webhook_id' => $webhook->id,
             ], ResponseAlias::HTTP_CREATED);
-        } catch (Throwable $th) {
+        } catch (Throwable $throwable) {
             return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage(),
+                    'message' => $throwable->getMessage(),
                 ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -46,10 +46,10 @@ class WebhookController extends BaseController
     {
         try {
             return new JsonResponse(FilamentWebhookServer::all(), ResponseAlias::HTTP_OK);
-        } catch (Throwable $th) {
+        } catch (Throwable $throwable) {
             return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage(),
+                    'message' => $throwable->getMessage(),
                 ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -75,10 +75,10 @@ class WebhookController extends BaseController
             $webhook->update($request->all());
 
             return new JsonResponse(['message' => 'Webhook updated!'], ResponseAlias::HTTP_OK);
-        } catch (Throwable $th) {
+        } catch (Throwable $throwable) {
             return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage(),
+                    'message' => $throwable->getMessage(),
                 ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -91,10 +91,10 @@ class WebhookController extends BaseController
             $webhook->delete();
 
             return new JsonResponse(['message' => 'Webhook deleted!'], ResponseAlias::HTTP_OK);
-        } catch (Throwable $th) {
+        } catch (Throwable $throwable) {
             return new JsonResponse([
                 'error' => [
-                    'message' => $th->getMessage(),
+                    'message' => $throwable->getMessage(),
                 ],
             ], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }

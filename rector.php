@@ -16,6 +16,7 @@ return RectorConfig::configure()
     ->withTypeCoverageLevel(10)
     ->withDeadCodeLevel(10)
     ->withCodeQualityLevel(10)
+    ->withCodingStyleLevel(10)
     ->withImportNames()
     ->withRules([
         \RectorLaravel\Rector\ClassMethod\AddGenericReturnTypeToRelationsRector::class,

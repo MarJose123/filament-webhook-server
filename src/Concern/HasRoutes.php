@@ -2,16 +2,14 @@
 
 namespace Marjose123\FilamentWebhookServer\Concern;
 
-use Filament\Support\Concerns\EvaluatesClosures;
-
 trait HasRoutes
 {
-
     protected bool $enableApiRoutes = false;
 
     public function enableApiRoutes(bool $enable = true): static
     {
         $this->enableApiRoutes = $enable;
+
         return $this;
     }
 
@@ -19,5 +17,4 @@ trait HasRoutes
     {
         return $this->enableApiRoutes;
     }
-
 }

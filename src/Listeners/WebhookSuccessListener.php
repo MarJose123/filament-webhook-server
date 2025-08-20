@@ -3,7 +3,6 @@
 namespace Marjose123\FilamentWebhookServer\Listeners;
 
 use Exception;
-use Illuminate\Support\Facades\Log;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
 use Marjose123\FilamentWebhookServer\WebhookPlugin;
 use Spatie\WebhookServer\Events\WebhookCallSucceededEvent;
@@ -25,9 +24,9 @@ class WebhookSuccessListener
                     'attempt' => $event->attempt,
                 ]);
             } catch (Exception $exception) {
-                Log::error('Failed to save webhook history: ', [
+                logger()->error('Failed to save webhook history: ', [
                     'error' => $exception->getMessage(),
-                ] );
+                ]);
             }
         }
     }

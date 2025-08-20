@@ -7,15 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Marjose123\FilamentWebhookServer\HookJobProcess;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServer;
 use ReflectionClass as RC;
-use ReflectionException;
-use Spatie\ModelInfo\ModelInfo;
 
 class ModelObserver
 {
-    /**
-     * @param Model $model
-     * @return void
-     */
     public function created(Model $model): void
     {
         $module = ucfirst((new RC($model))->getShortName());
@@ -33,10 +27,6 @@ class ModelObserver
         (new HookJobProcess($search, $model, 'created', $module))->send();
     }
 
-    /**
-     * @param Model $model
-     * @return void
-     */
     public function updated(Model $model): void
     {
         $module = ucfirst((new RC($model))->getShortName());
@@ -54,10 +44,6 @@ class ModelObserver
         (new HookJobProcess($search, $model, 'updated', $module))->send();
     }
 
-    /**
-     * @param Model $model
-     * @return void
-     */
     public function deleted(Model $model): void
     {
         $module = ucfirst((new RC($model))->getShortName());
@@ -75,10 +61,6 @@ class ModelObserver
         (new HookJobProcess($search, $model, 'deleted', $module))->send();
     }
 
-    /**
-     * @param Model $model
-     * @return void
-     */
     public function restored(Model $model): void
     {
         $module = ucfirst((new RC($model))->getShortName());
@@ -95,5 +77,4 @@ class ModelObserver
          */
         (new HookJobProcess($search, $model, 'restored', $module))->send();
     }
-
 }

@@ -27,11 +27,11 @@ trait HasModels
 
     public function getModels(): array
     {
-       $discovery = ModelDiscovery::getAllModels();
+        $discovery = ModelDiscovery::getAllModels();
 
-       $models = array_merge($this->models, $discovery);
+        $models = array_merge($this->models, $discovery);
 
-       return Arr::except($models, $this->getExcludedModels());
+        return Arr::except($models, $this->getExcludedModels());
     }
 
     public function getExcludedModels(): array

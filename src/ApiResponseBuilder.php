@@ -17,7 +17,7 @@ class ApiResponseBuilder
 
     public static function create(): ApiResponseBuilder
     {
-        return (new static);
+        return new static;
     }
 
     public function setModel(Model $model): static
@@ -48,9 +48,6 @@ class ApiResponseBuilder
         return $this;
     }
 
-    /**
-     * @return object
-     */
     public function generate(): object
     {
         $payload = match ($this->dataOption) {
