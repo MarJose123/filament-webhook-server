@@ -36,9 +36,13 @@ class WebhookHistory extends Page implements HasTable
     public function mount(): void
     {
         if (filament()->isServing() && WebhookPlugin::get()->canKeepLogs()) {
-            $this->webhookClient_Id = request('client_id');
+            if (request()->has('client_id') && filled(request('client_id'))) {
+                $this->webhookClient_Id = request('client_id');
+            } else {
+                redirect()->intended(Webhooks::getUrl());
+            }
         } else {
-            redirect()->intended(url()->previous());
+            redirect()->intended(Webhooks::getUrl());
         }
     }
 
