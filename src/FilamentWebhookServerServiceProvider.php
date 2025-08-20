@@ -13,6 +13,7 @@ class FilamentWebhookServerServiceProvider extends PackageServiceProvider
     {
         $package->name(static::$name)
             ->hasTranslations()
+            ->hasRoute('api')
             ->hasMigrations(['create_filament-webhook-server_table', 'create_filament_webhook_server_histories_table'])
             ->hasViews();
     }
