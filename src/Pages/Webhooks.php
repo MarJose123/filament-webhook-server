@@ -302,10 +302,13 @@ class Webhooks extends Page implements HasSchemas, HasTable
             TextColumn::make('model')
                 ->label('Module'),
             TextColumn::make('url')
+                ->label('Notify URL')
                 ->toggleable(isToggledHiddenByDefault: true),
             TextColumn::make('verifySsl')
+                ->label('Verify SSL')
                 ->formatStateUsing(fn ($state): string => $state ? 'Yes' : 'No'),
             TextColumn::make('events')
+                ->label('Events')
                 ->badge()
                 ->separator()
                 ->wrap(),
