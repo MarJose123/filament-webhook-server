@@ -5,26 +5,29 @@ namespace Marjose123\FilamentWebhookServer\Listeners;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Marjose123\FilamentWebhookServer\Models\FilamentWebhookServerHistory;
+use Marjose123\FilamentWebhookServer\WebhookPlugin;
 use Spatie\WebhookServer\Events\WebhookCallFailedEvent;
 
 class WebhookFailedListener
 {
     public function __construct() {}
 
-    public function handle(WebhookCallFailedEvent $event)
+    public function handle(WebhookCallFailedEvent $event): void
     {
-        if (config('filament-webhook-server.webhook.keep_history')) {
+        if (WebhookPlugin::get()->canKeepLogs()) {
             try {
-                $webhookClientHistory = new FilamentWebhookServerHistory;
-                $webhookClientHistory->webhook_client = $event->meta['webhookClient'];
-                $webhookClientHistory->uuid = $event->uuid;
-                $webhookClientHistory->status_code = $event->response->getStatusCode();
-                $webhookClientHistory->errorMessage = $event->response->getReasonPhrase();
-                $webhookClientHistory->errorType = $event->errorType;
-                $webhookClientHistory->attempt = $event->attempt;
-                $res = $webhookClientHistory->save();
-            } catch (Exception $error) {
-                Log::info(print_r($error, true));
+                FilamentWebhookServerHistory::create([
+                    'webhook_client' => $event->meta['webhookClient'],
+                    'uuid' => $event->uuid,
+                    'status_code' => $event->response->getStatusCode(),
+                    'errorMessage' => $event->response->getReasonPhrase(),
+                    'errorType' => $event->errorType,
+                    'attempt' => $event->attempt,
+                ]);
+            } catch (Exception $exception) {
+                Log::error('Failed to save webhook history: ', [
+                    'error' => $exception->getMessage(),
+                ] );
             }
         }
     }
