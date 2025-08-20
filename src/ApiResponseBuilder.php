@@ -9,8 +9,6 @@ class ApiResponseBuilder
 {
     private Model $model;
 
-    private ?string $message;
-
     private ?string $dataOption;
 
     private ?string $event;
@@ -19,8 +17,7 @@ class ApiResponseBuilder
 
     public static function create(): ApiResponseBuilder
     {
-        return (new static)
-            ->setMessage(null);
+        return (new static);
     }
 
     public function setModel(Model $model): static
@@ -40,13 +37,6 @@ class ApiResponseBuilder
     public function setEvent(?string $event): static
     {
         $this->event = $event;
-
-        return $this;
-    }
-
-    public function setMessage(?string $message): static
-    {
-        $this->message = $message;
 
         return $this;
     }
