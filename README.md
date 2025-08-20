@@ -35,7 +35,16 @@ public function panel(Panel $panel): Panel
     return $panel
         // ...
         ->plugins([
-               WebhookPlugin::make() // <- Add this
+              WebhookPlugin::make()
+                    ->icon(Heroicon::AcademicCap) // Set the icon for the plugin
+                    ->enableApiRoutes() // Enable the API routes
+                    ->includeModels([]) // Include the models you want to be able to receive webhooks for that is not automatically included
+                    ->excludedModels([]) // Exclude the models you don't want to be able to receive webhooks for
+                    ->keepLogs() // Keep the logs of the webhooks
+                    ->sort(1) // Set the sort order of the webhooks plugin in the navigation
+                    ->polling(10) // Set the polling interval in seconds for the webhook plugin
+                    ->customPageUsing(webhookPage: Webhooks::class, webhookHistoryPage: WebhookHistory::class) // Set the custom pages for the webhooks plugin if you want to use your own
+                    ->enablePlugin(),
         ]);  
        
 }
