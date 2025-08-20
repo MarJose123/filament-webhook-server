@@ -39,7 +39,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
     /**
      * @var array<string, mixed> | null
      */
-    public ?array $data = ['header' => null];
+    public ?array $data = ['header' => []];
 
     public static function getCluster(): ?string
     {
@@ -69,9 +69,9 @@ class Webhooks extends Page implements HasSchemas, HasTable
     public function mount(): void
     {
         $this->form->fill([
-            'header' => [
-                'Content-Type' => 'application/json',
-            ],
+            'method' => 'post',
+            'verifySsl' => false,
+            'data_option' => 'summary',
         ]);
     }
 
@@ -104,13 +104,15 @@ class Webhooks extends Page implements HasSchemas, HasTable
 
         $this->form->getState();
 
+        $headers = collect($this->data['header'])->mapWithKeys(fn ($item) => [$item['key'] => $item['value']])->toArray();
+
         FilamentWebhookServer::create([
             'name' => $this->data['name'],
             'description' => $this->data['description'],
             'url' => $this->data['url'],
             'method' => $this->data['method'],
             'model' => ucfirst((string) $this->data['model']),
-            'header' => $this->data['header'],
+            'header' => $headers,
             'data_option' => $this->data['data_option'],
             'events' => $this->data['events'],
             'verifySsl' => $this->data['verifySsl'],
