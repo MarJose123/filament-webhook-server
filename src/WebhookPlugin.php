@@ -10,6 +10,7 @@ use Marjose123\FilamentWebhookServer\Concern\HasLogs;
 use Marjose123\FilamentWebhookServer\Concern\HasModels;
 use Marjose123\FilamentWebhookServer\Concern\HasNavigation;
 use Marjose123\FilamentWebhookServer\Concern\HasPolling;
+use Marjose123\FilamentWebhookServer\Concern\HasRoutes;
 use Marjose123\FilamentWebhookServer\Concern\HasState;
 use Marjose123\FilamentWebhookServer\Observers\ModelObserver;
 
@@ -21,6 +22,7 @@ class WebhookPlugin implements Plugin
     use HasNavigation;
     use HasPolling;
     use HasState;
+    use HasRoutes;
 
     public function getId(): string
     {
