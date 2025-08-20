@@ -59,7 +59,7 @@ class WebhookHistory extends Page implements HasTable
             TextColumn::make('errorType')
                 ->label('Error Type'),
             TextColumn::make('attempt')
-                ->label('Attempt'),
+                ->label('Attempts'),
         ];
     }
 
