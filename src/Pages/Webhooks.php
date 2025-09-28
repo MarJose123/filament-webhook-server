@@ -353,7 +353,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
 
     protected function getTablePollingInterval(): ?string
     {
-        return config('filament-webhook-server.polling', '10s');
+        return filament()->isServing() && WebhookPlugin::get()->isPolling() ? WebhookPlugin::get()->getPollingInterval() : null;
     }
 
     public function content(Schema $schema): Schema
