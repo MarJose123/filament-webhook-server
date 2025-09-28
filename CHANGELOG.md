@@ -2,6 +2,16 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 3.0.1 - 2025-09-28
+
+### What's Changed
+
+* chore(deps): bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/48
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/47
+* feat: Control table polling via plugin config by @MarJose123 in https://github.com/MarJose123/filament-webhook-server/pull/50
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/3.0...3.0.1
+
 ## 3.0 - 2025-08-20
 
 ### What's Changed
@@ -200,6 +210,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -221,9 +232,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
