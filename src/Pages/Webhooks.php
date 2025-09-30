@@ -46,7 +46,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
         return filament()->isServing() && WebhookPlugin::get()->getCluster() ? WebhookPlugin::get()->getCluster() : null;
     }
 
-    public static function getNavigationIcon(): string
+    public static function getNavigationIcon(): string|Heroicon|Htmlable|null
     {
         return filament()->isServing() && WebhookPlugin::get()->getIcon() ? WebhookPlugin::get()->getIcon() : Heroicon::OutlinedBolt;
     }
