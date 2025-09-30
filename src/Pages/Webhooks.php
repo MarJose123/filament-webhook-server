@@ -46,7 +46,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
         return filament()->isServing() && WebhookPlugin::get()->getCluster() ? WebhookPlugin::get()->getCluster() : null;
     }
 
-    public static function getNavigationIcon(): string|Heroicon|Htmlable|null
+    public static function getNavigationIcon(): string
     {
         return filament()->isServing() && WebhookPlugin::get()->getIcon() ? WebhookPlugin::get()->getIcon() : Heroicon::OutlinedBolt;
     }
@@ -58,7 +58,7 @@ class Webhooks extends Page implements HasSchemas, HasTable
 
     public static function getNavigationGroup(): ?string
     {
-        return __('filament-webhook-server::default.pages.navigation.group');
+        return filament()->isServing() && WebhookPlugin::get()->getNavigationGroup() ? WebhookPlugin::get()->getNavigationGroup() :  __('filament-webhook-server::default.pages.navigation.group');
     }
 
     public static function getNavigationSort(): ?int

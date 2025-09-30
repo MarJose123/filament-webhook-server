@@ -10,6 +10,20 @@ trait HasNavigation
 
     protected int $sort = 0;
 
+    protected ?string $navigationGroup = null;
+
+    public function navigationGroup(string $navigationGroup): static
+    {
+        $this->navigationGroup = $navigationGroup;
+
+        return $this;
+    }
+
+    public function getNavigationGroup(): ?string
+    {
+        return $this->navigationGroup ?? __('filament-webhook-server::default.pages.navigation.group');
+    }
+
     public function sort(int $sort): static
     {
         $this->sort = $sort;
