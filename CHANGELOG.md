@@ -2,6 +2,14 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 3.0.2 - 2025-10-02
+
+### What's Changed
+
+* Add navigation group configurable by @a21ns1g4ts in https://github.com/MarJose123/filament-webhook-server/pull/51
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/3.0.1...3.0.2
+
 ## 3.0.1 - 2025-09-28
 
 ### What's Changed
@@ -211,6 +219,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -233,9 +242,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
