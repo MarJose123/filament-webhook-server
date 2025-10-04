@@ -27,12 +27,17 @@ trait HasModels
 
     public function getModels(): array
     {
+        // If models are explicitly set, use only those
+        if (!empty($this->models)) {
+            return array_diff($this->models, $this->getExcludedModels());
+        }
+
+        // Otherwise, use discovered models
         $discovery = ModelDiscovery::getAllModels();
 
-        $models = array_merge($this->models, $discovery);
-
-        return Arr::except($models, $this->getExcludedModels());
+        return array_diff($discovery, $this->getExcludedModels());
     }
+
 
     public function getExcludedModels(): array
     {
