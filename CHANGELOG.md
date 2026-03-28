@@ -2,6 +2,17 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 3.1 - 2026-03-28
+
+### What's Changed
+
+* chore(deps): bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/56
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/54
+* chore(deps): bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/55
+* feat(composer): Update Filament dependency and author name by @MarJose123 in https://github.com/MarJose123/filament-webhook-server/pull/58
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/3.0.2...3.1
+
 ## 2.2.0 - 2025-03-24
 
 ### What's Changed
@@ -190,6 +201,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -210,9 +222,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
