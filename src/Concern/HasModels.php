@@ -31,7 +31,7 @@ trait HasModels
 
         $models = array_merge($this->models, $discovery);
 
-        return Arr::except($models, $this->getExcludedModels());
+        return Arr::exceptValues($models, $this->getExcludedModels());
     }
 
     public function getExcludedModels(): array
