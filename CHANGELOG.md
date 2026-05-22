@@ -2,6 +2,21 @@
 
 All notable changes to `filament-webhook-server` will be documented in this file.
 
+## 3.2 - 2026-05-22
+
+### What's Changed
+
+* chore(deps): bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/60
+* chore(deps): bump actions/dependency-review-action from 4 to 5 by @dependabot[bot] in https://github.com/MarJose123/filament-webhook-server/pull/61
+* Change to use exceptValues for model exclusion by @marcogermani87 in https://github.com/MarJose123/filament-webhook-server/pull/62
+* Added IT translation by @marcogermani87 in https://github.com/MarJose123/filament-webhook-server/pull/63
+
+### New Contributors
+
+* @marcogermani87 made their first contribution in https://github.com/MarJose123/filament-webhook-server/pull/62
+
+**Full Changelog**: https://github.com/MarJose123/filament-webhook-server/compare/3.1...3.2
+
 ## 3.1 - 2026-03-28
 
 ### What's Changed
@@ -202,6 +217,7 @@ return [
 
 
 
+
 ```
 - Republish and run the migrations with:
 
@@ -223,9 +239,11 @@ php artisan vendor:publish --tag="filament-webhook-server-migrations"
 
 
 
+
 ```
 ```bash
 php artisan migrate
+
 
 
 
